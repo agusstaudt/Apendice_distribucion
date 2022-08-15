@@ -1,0 +1,2173 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Capítulo 3 &#8212; Una herramienta práctica para trabajar con datos</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Capitulo 2" href="capitulo2.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logoCEDLAS.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Una herramienta práctica para trabajar con datos</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Apéndices del Libro Pobreza y Desigualdad en Python
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Capítulos
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="capitulo2.html">
+   Capitulo 2
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Capítulo 3
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/agusstaudt/Apendice_distribucion/master?urlpath=tree/docs/sections/capitulo3.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/agusstaudt/Apendice_distribucion"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/agusstaudt/Apendice_distribucion/issues/new?title=Issue%20on%20page%20%2Fsections/capitulo3.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/sections/capitulo3.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#rutina-de-python-para-replicar-el-apendice-en-la-practica-del-capitulo-3-de-pobreza-y-desigualdad-en-america-latina">
+   Rutina de Python para replicar el “Apéndice en la Práctica” del capítulo 3 de Pobreza y Desigualdad en América Latina
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#ultima-actualizacion-03-de-agosto-de-2022">
+     Ultima actualización: 03 de agosto de 2022
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#set-inicial">
+   Set inicial
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cociente-de-quintiles">
+   3.1 Cociente de quintiles
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#replicar-programa-ratq51">
+   3.2 Replicar programa ratq51
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#replicar-programa-gcuan">
+   3.3 Replicar programa gcuan
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#tamano-de-los-hogares">
+   3.4 Tamaño de los hogares
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#distribucion-intrahogar">
+   3.5 Distribución intrahogar
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#empleo-de-ponderadores">
+   3.6 Empleo de ponderadores
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#diseno-muestral">
+   3.7 Diseño muestral
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#fuentes-de-ingreso">
+   3.8 Fuentes de ingreso
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Capítulo 3</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#rutina-de-python-para-replicar-el-apendice-en-la-practica-del-capitulo-3-de-pobreza-y-desigualdad-en-america-latina">
+   Rutina de Python para replicar el “Apéndice en la Práctica” del capítulo 3 de Pobreza y Desigualdad en América Latina
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#ultima-actualizacion-03-de-agosto-de-2022">
+     Ultima actualización: 03 de agosto de 2022
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#set-inicial">
+   Set inicial
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cociente-de-quintiles">
+   3.1 Cociente de quintiles
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#replicar-programa-ratq51">
+   3.2 Replicar programa ratq51
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#replicar-programa-gcuan">
+   3.3 Replicar programa gcuan
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#tamano-de-los-hogares">
+   3.4 Tamaño de los hogares
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#distribucion-intrahogar">
+   3.5 Distribución intrahogar
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#empleo-de-ponderadores">
+   3.6 Empleo de ponderadores
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#diseno-muestral">
+   3.7 Diseño muestral
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#fuentes-de-ingreso">
+   3.8 Fuentes de ingreso
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <hr class="docutils" />
+<section class="tex2jax_ignore mathjax_ignore" id="capitulo-3">
+<h1>Capítulo 3<a class="headerlink" href="#capitulo-3" title="Permalink to this headline">#</a></h1>
+<section id="rutina-de-python-para-replicar-el-apendice-en-la-practica-del-capitulo-3-de-pobreza-y-desigualdad-en-america-latina">
+<h2>Rutina de Python para replicar el “Apéndice en la Práctica” del capítulo 3 de Pobreza y Desigualdad en América Latina<a class="headerlink" href="#rutina-de-python-para-replicar-el-apendice-en-la-practica-del-capitulo-3-de-pobreza-y-desigualdad-en-america-latina" title="Permalink to this headline">#</a></h2>
+<section id="ultima-actualizacion-03-de-agosto-de-2022">
+<h3>Ultima actualización: 03 de agosto de 2022<a class="headerlink" href="#ultima-actualizacion-03-de-agosto-de-2022" title="Permalink to this headline">#</a></h3>
+<p>Códigos escritos en base a los apéndices del libro “Pobreza y Desigualdad en América Latina” de Gasparini, Cicowiez y Sosa Escudero. El objeto de este material es reproducir la rutina de códigos para STATA presentada en el libro al lenguaje <em>Python</em>. Este material es sólo de carácter complementario a las explicaciones y detalles conceptuales que se presentan en el libro de texto y los apéndices.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="set-inicial">
+<h2>Set inicial<a class="headerlink" href="#set-inicial" title="Permalink to this headline">#</a></h2>
+<p>Antes de comenzar, se cargan las librerías necesarias para poder desarrollar el capítulo:</p>
+<ul class="simple">
+<li><p><em>os</em>: realizar consultas acerca de directorios o pedidos específicos al sistema opertivo.</p></li>
+<li><p><em>pandas</em>: necesario para manipulación y análisis de datos.</p></li>
+<li><p><em>matplotlib</em>: para visualización.</p></li>
+<li><p><em>numpy</em>: para creación y manipulación de vectores y matrices. También presenta una gran colección de funciones matemáticas para operar con ellas.</p></li>
+<li><p><em>math</em>: para utilizar también funciones matemáticas.</p></li>
+<li><p><em>scipy</em>: herramientas y algoritmos matemáticos. contiene módulos para optimización, álgebra lineal, integración, interpolación, funciones especiales.</p></li>
+<li><p><em>econtools</em>: herramientas econométricas.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Importamos librerias de Python necesarias para replicar los calculos</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">stats</span>
+<span class="o">!</span>pip install econtools
+<span class="kn">import</span> <span class="nn">econtools</span>
+<span class="kn">import</span> <span class="nn">econtools.metrics</span> <span class="k">as</span> <span class="nn">mt</span>
+<span class="kn">import</span> <span class="nn">time</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: econtools in c:\users\usuario\appdata\local\programs\python\python310\lib\site-packages (0.3.2)
+Requirement already satisfied: numpy&gt;=1.9.2 in c:\users\usuario\appdata\roaming\python\python310\site-packages (from econtools) (1.23.1)
+Requirement already satisfied: scipy in c:\users\usuario\appdata\local\programs\python\python310\lib\site-packages (from econtools) (1.8.1)
+Requirement already satisfied: pandas&gt;=0.16.0 in c:\users\usuario\appdata\roaming\python\python310\site-packages (from econtools) (1.4.3)
+Requirement already satisfied: python-dateutil&gt;=2.8.1 in c:\users\usuario\appdata\local\programs\python\python310\lib\site-packages (from pandas&gt;=0.16.0-&gt;econtools) (2.8.2)
+Requirement already satisfied: pytz&gt;=2020.1 in c:\users\usuario\appdata\roaming\python\python310\site-packages (from pandas&gt;=0.16.0-&gt;econtools) (2022.1)
+Requirement already satisfied: six&gt;=1.5 in c:\users\usuario\appdata\local\programs\python\python310\lib\site-packages (from python-dateutil&gt;=2.8.1-&gt;pandas&gt;=0.16.0-&gt;econtools) (1.16.0)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Al igual que en el capítulo 2, utilizamos colores para la ejecución de <code class="docutils literal notranslate"><span class="pre">print()</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Utilizamos algunos estilos </span>
+<span class="k">class</span> <span class="nc">style</span><span class="p">():</span>
+    <span class="n">black</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\033</span><span class="s1">[30m&#39;</span>
+    <span class="n">red</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\033</span><span class="s1">[31m&#39;</span>
+    <span class="n">green</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\033</span><span class="s1">[1;32m&#39;</span> <span class="c1"># negrita</span>
+    <span class="n">underline</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\033</span><span class="s1">[4m&#39;</span>
+    <span class="n">mark</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\33</span><span class="s1">[44m&#39;</span>
+    <span class="n">italic</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\33</span><span class="s1">[3;32m&#39;</span>
+    <span class="n">endc</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\033</span><span class="s1">[0m&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>A continuación cargamos las bases que vamos a utilizar. Se importan los archivos desde <em>google drive</em> de la misma manera que en el capítulo 2, con la diferencia de que al ser bases para diferentes países primero armamos una lista con los <em>id</em> de las bases que necesitamos, y las cargas se guardan en un diccionario de <em>python</em>. Los diccionarios aquí nos permiten crear mapeos a partir de una <em>key</em> y <em>values</em>, donde a partir de un nombre clave podemos almacenar listas o incluso un dataframe entero. Los mismos resultan muy útiles para problemas como el de almacenar diferentes <em>dataframes</em> en un solo lugar. Para más información acerca de diccionarios pueden consultar <a class="reference external" href="https://www.freecodecamp.org/espanol/news/compresion-de-diccionario-en-python-explicado-con-ejemplos/#:~:text=%C2%BFQu%C3%A9%20es%20un%20diccionario%20en,un%20par%20de%20corchetes%20%7B%7D%20."><em><strong>freeCodeCamp</strong></em></a>. Los diccionarios tienen la siguiente forma:</p>
+<p><code class="docutils literal notranslate"><span class="pre">mi_diccionario</span> <span class="pre">=</span> <span class="pre">{&quot;key1&quot;:&lt;value1&gt;,&quot;key2&quot;:&lt;value2&gt;,&quot;key3&quot;:&lt;value3&gt;,&quot;key4&quot;:&lt;value4&gt;}</span></code></p>
+<p>Donde cada <em>value</em> puede referirse a un vector o base de datos. Para el siguiente bucle, cada <em>dataframe</em> cargado se guardará en <em>df_todos</em>. Nada nuevo a lo que venimos realizando, con la excepción de la función <code class="docutils literal notranslate"><span class="pre">sleep()</span></code> de la librería <code class="docutils literal notranslate"><span class="pre">time</span></code>. Google maneja ciertos límites para realizar sucesivas <em>queries</em> o pedidos, por lo que dada cierta repetición de solicitudes en un período corto de tiempo <em>python</em> podría arrojarnos un error. Por lo que en cada iteración pausamos el tiempo por la cantidad de segundos indicado en el bucle, en nuestro caso demoramos el proceso 4 segundos por repetición.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Cargamos las bases</span>
+<span class="n">df_todos</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">links</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;1fgHKvdLDe3x5tCQheoXRL1JMGNDW0W7n&quot;</span><span class="p">,</span> <span class="s2">&quot;1udEv9SNL9IiOCmfXg8MLdru1v9C_Sds2&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;1ZBX4B4IrGPGIN9VwZLknaddCJ4AqAE07&quot;</span><span class="p">,</span> <span class="s2">&quot;1f5p2qF1N9tgqoQ-bdY8QMvzSnt2FCFWY&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;1-a7OTv-I6SJXDhFhrCixbitx7KT4_lgx&quot;</span><span class="p">]</span>
+<span class="n">dfs</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;df_ecu&quot;</span><span class="p">,</span> <span class="s2">&quot;df_mex&quot;</span><span class="p">,</span> <span class="s2">&quot;df_nic&quot;</span><span class="p">,</span> <span class="s2">&quot;df_per&quot;</span><span class="p">,</span> <span class="s2">&quot;df_pan&quot;</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">links</span><span class="p">)):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;iteration</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">: </span><span class="si">{</span><span class="n">style</span><span class="o">.</span><span class="n">green</span><span class="si">}{</span><span class="n">dfs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">}{</span><span class="n">style</span><span class="o">.</span><span class="n">endc</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="n">df_todos</span><span class="p">[</span><span class="n">dfs</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_stata</span><span class="p">(</span><span class="s1">&#39;https://drive.google.com/uc?id=&#39;</span> <span class="o">+</span> <span class="n">links</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> 
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="c1"># restringimos la velocidad de cada query  </span>
+<span class="n">df_todos</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>iteration0: <span class=" -Color -Color-Bold -Color-Bold-Green">df_ecu</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>iteration1: <span class=" -Color -Color-Bold -Color-Bold-Green">df_mex</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>iteration2: <span class=" -Color -Color-Bold -Color-Bold-Green">df_nic</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>iteration3: <span class=" -Color -Color-Bold -Color-Bold-Green">df_per</span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>iteration4: <span class=" -Color -Color-Bold -Color-Bold-Green">df_pan</span>
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="nn">Input In [3],</span> in <span class="ni">&lt;cell line: 7&gt;</span><span class="nt">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">links</span><span class="p">)):</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span>     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;iteration</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">: </span><span class="si">{</span><span class="n">style</span><span class="o">.</span><span class="n">green</span><span class="si">}{</span><span class="n">dfs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">}{</span><span class="n">style</span><span class="o">.</span><span class="n">endc</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="ne">----&gt; </span><span class="mi">9</span>     <span class="n">df_todos</span><span class="p">[</span><span class="n">dfs</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_stata</span><span class="p">(</span><span class="s1">&#39;https://drive.google.com/uc?id=&#39;</span> <span class="o">+</span> <span class="n">links</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> 
+<span class="g g-Whitespace">     </span><span class="mi">10</span>     <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="c1"># restringimos la velocidad de cada query  </span>
+<span class="g g-Whitespace">     </span><span class="mi">11</span> <span class="n">df_todos</span>
+
+<span class="nn">File ~\AppData\Roaming\Python\Python310\site-packages\pandas\io\stata.py:2022,</span> in <span class="ni">read_stata</span><span class="nt">(filepath_or_buffer, convert_dates, convert_categoricals, index_col, convert_missing, preserve_dtypes, columns, order_categoricals, chunksize, iterator, compression, storage_options)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2019</span>     <span class="k">return</span> <span class="n">reader</span>
+<span class="g g-Whitespace">   </span><span class="mi">2021</span> <span class="k">with</span> <span class="n">reader</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">2022</span>     <span class="k">return</span> <span class="n">reader</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+
+<span class="nn">File ~\AppData\Roaming\Python\Python310\site-packages\pandas\io\stata.py:1720,</span> in <span class="ni">StataReader.read</span><span class="nt">(self, nrows, convert_dates, convert_categoricals, index_col, convert_missing, preserve_dtypes, columns, order_categoricals)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1718</span> <span class="k">for</span> <span class="n">col</span><span class="p">,</span> <span class="n">typ</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">typlist</span><span class="p">):</span>
+<span class="g g-Whitespace">   </span><span class="mi">1719</span>     <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">typ</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">int</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">1720</span>         <span class="n">data</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_decode</span><span class="p">,</span> <span class="n">convert_dtype</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1722</span> <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_insert_strls</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1724</span> <span class="n">cols_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">([</span><span class="n">dtyp</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">for</span> <span class="n">dtyp</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">dtyplist</span><span class="p">])[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="nn">File ~\AppData\Roaming\Python\Python310\site-packages\pandas\core\frame.py:3655,</span> in <span class="ni">DataFrame.__setitem__</span><span class="nt">(self, key, value)</span>
+<span class="g g-Whitespace">   </span><span class="mi">3652</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_setitem_array</span><span class="p">([</span><span class="n">key</span><span class="p">],</span> <span class="n">value</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">3653</span> <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">3654</span>     <span class="c1"># set column</span>
+<span class="ne">-&gt; </span><span class="mi">3655</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_set_item</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+<span class="nn">File ~\AppData\Roaming\Python\Python310\site-packages\pandas\core\frame.py:3832,</span> in <span class="ni">DataFrame._set_item</span><span class="nt">(self, key, value)</span>
+<span class="g g-Whitespace">   </span><span class="mi">3822</span> <span class="k">def</span> <span class="nf">_set_item</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">3823</span>     <span class="sd">&quot;&quot;&quot;</span>
+<span class="g g-Whitespace">   </span><span class="mi">3824</span><span class="sd">     Add series to DataFrame in specified column.</span>
+<span class="g g-Whitespace">   </span><span class="mi">3825</span><span class="sd"> </span>
+<span class="sd">   (...)</span>
+<span class="g g-Whitespace">   </span><span class="mi">3830</span><span class="sd">     ensure homogeneity.</span>
+<span class="g g-Whitespace">   </span><span class="mi">3831</span><span class="sd">     &quot;&quot;&quot;</span>
+<span class="ne">-&gt; </span><span class="mi">3832</span>     <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sanitize_column</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">3834</span>     <span class="k">if</span> <span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">3835</span>         <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">columns</span>
+<span class="g g-Whitespace">   </span><span class="mi">3836</span>         <span class="ow">and</span> <span class="n">value</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">1</span>
+<span class="g g-Whitespace">   </span><span class="mi">3837</span>         <span class="ow">and</span> <span class="ow">not</span> <span class="n">is_extension_array_dtype</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">3838</span>     <span class="p">):</span>
+<span class="g g-Whitespace">   </span><span class="mi">3839</span>         <span class="c1"># broadcast across multiple columns if necessary</span>
+<span class="g g-Whitespace">   </span><span class="mi">3840</span>         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">is_unique</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">columns</span><span class="p">,</span> <span class="n">MultiIndex</span><span class="p">):</span>
+
+<span class="nn">File ~\AppData\Roaming\Python\Python310\site-packages\pandas\core\frame.py:4532,</span> in <span class="ni">DataFrame._sanitize_column</span><span class="nt">(self, value)</span>
+<span class="g g-Whitespace">   </span><span class="mi">4530</span> <span class="c1"># We should never get here with DataFrame value</span>
+<span class="g g-Whitespace">   </span><span class="mi">4531</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">Series</span><span class="p">):</span>
+<span class="ne">-&gt; </span><span class="mi">4532</span>     <span class="k">return</span> <span class="n">_reindex_for_setitem</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">4534</span> <span class="k">if</span> <span class="n">is_list_like</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+<span class="g g-Whitespace">   </span><span class="mi">4535</span>     <span class="n">com</span><span class="o">.</span><span class="n">require_length_match</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+
+<span class="nn">File ~\AppData\Roaming\Python\Python310\site-packages\pandas\core\frame.py:10996,</span> in <span class="ni">_reindex_for_setitem</span><span class="nt">(value, index)</span>
+<span class="g g-Whitespace">  </span><span class="mi">10992</span> <span class="k">def</span> <span class="nf">_reindex_for_setitem</span><span class="p">(</span><span class="n">value</span><span class="p">:</span> <span class="n">DataFrame</span> <span class="o">|</span> <span class="n">Series</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="n">Index</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ArrayLike</span><span class="p">:</span>
+<span class="g g-Whitespace">  </span><span class="mi">10993</span>     <span class="c1"># reindex if necessary</span>
+<span class="g g-Whitespace">  </span><span class="mi">10995</span>     <span class="k">if</span> <span class="n">value</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">equals</span><span class="p">(</span><span class="n">index</span><span class="p">)</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">len</span><span class="p">(</span><span class="n">index</span><span class="p">):</span>
+<span class="ne">&gt; </span><span class="mi">10996</span>         <span class="k">return</span> <span class="n">value</span><span class="o">.</span><span class="n">_values</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="g g-Whitespace">  </span><span class="mi">10998</span>     <span class="c1"># GH#4107</span>
+<span class="g g-Whitespace">  </span><span class="mi">10999</span>     <span class="k">try</span><span class="p">:</span>
+
+<span class="ne">KeyboardInterrupt</span>: 
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="cociente-de-quintiles">
+<h2>3.1 Cociente de quintiles<a class="headerlink" href="#cociente-de-quintiles" title="Permalink to this headline">#</a></h2>
+<p><a class="reference external" href="https://drive.google.com/file/d/1MwQrMylnYL0VHrLRM3JafsCBE9NkisAJ/view"><em><strong>Páginas 151-152</strong></em></a></p>
+<p>El siguiente bloque de código puede utilizarse para computar el cociente de quintiles extremos presentado en el cuadro 3.2 del texto del libro, el cual es un indicador de desigualdad extendido en la literatura, que denota la magnitud de las brechas entre los más ricos y más pobres. Para realizar el cálculo se trabaja sobre un bucle que va a iterar sobre cada una de las bases importadas. En primer lugar, se filtra del diccionario el <em>dataframe</em> de interés denominado <em>df</em> y se eliminan las observaciones <em>ipcf</em> nulas para luego ordenarlas de manera ascendente con <code class="docutils literal notranslate"><span class="pre">sort_values()</span></code>. Posteriormente, se crea la proporción de población acumulada <em>shrpop</em> utilizando el factor de expansión <em>pondera</em>, ya que a partir de <em>shrpop</em> podemos identificar los 5 quintiles. La variable <em>quintil</em> vale 1 para el 20% más pobre de la población, 2 para el 20% siguiente, y así sucesivamente. Una vez obtenida la variable <em>quintil</em> computamos el ingreso promedio ponderado para las observaciones del quintil 1 y 5. En el cálculo de los <em>ipcf</em> promedios le indicamos a python con <code class="docutils literal notranslate"><span class="pre">loc()</span></code> que solo queremos quedarnos con las observaciones del quintil 1 (en <em>meadia_q1</em>) y el quintil 5 (en <em>media_q5</em>). A partir de la generación del <em>ipcf</em> promedio para ambos quintiles pasamos a calcular el ratio de estos dos valores e imprimimos el resultado con la función <code class="docutils literal notranslate"><span class="pre">print()</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calculamos el cociente de quintiles para todas las base</span>
+<span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">dfs</span><span class="p">:</span> 
+    <span class="c1"># Ordenar las observaciones del dataframe segun el IPCF</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df_todos</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;ipcf&quot;</span><span class="p">]</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;ipcf&#39;</span><span class="p">])</span>
+
+    <span class="c1"># Creamos una variable con la proporcion de poblacion acumulada</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span><span class="s2">&quot;shrpop&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;pondera&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">cumsum</span><span class="p">()</span>
+    <span class="n">df</span><span class="p">[</span><span class="s2">&quot;shrpop&quot;</span><span class="p">]</span><span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;shrpop&quot;</span><span class="p">]</span><span class="o">/</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;pondera&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+
+    <span class="c1"># Identificamos quintiles del IPCF</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;shrpop&quot;</span><span class="p">]</span><span class="o">&gt;=</span><span class="mi">0</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;shrpop&quot;</span><span class="p">]</span><span class="o">&lt;=</span><span class="mf">0.2</span><span class="p">)),</span><span class="s2">&quot;quintil&quot;</span><span class="p">]</span><span class="o">=</span><span class="mi">1</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;shrpop&quot;</span><span class="p">]</span><span class="o">&gt;</span><span class="mf">0.2</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;shrpop&quot;</span><span class="p">]</span><span class="o">&lt;=</span><span class="mf">0.4</span><span class="p">),</span><span class="s2">&quot;quintil&quot;</span><span class="p">]</span><span class="o">=</span><span class="mi">2</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;shrpop&quot;</span><span class="p">]</span><span class="o">&gt;</span><span class="mf">0.4</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;shrpop&quot;</span><span class="p">]</span><span class="o">&lt;=</span><span class="mf">0.6</span><span class="p">),</span><span class="s2">&quot;quintil&quot;</span><span class="p">]</span><span class="o">=</span><span class="mi">3</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;shrpop&quot;</span><span class="p">]</span><span class="o">&gt;</span><span class="mf">0.6</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;shrpop&quot;</span><span class="p">]</span><span class="o">&lt;=</span><span class="mf">0.8</span><span class="p">),</span><span class="s2">&quot;quintil&quot;</span><span class="p">]</span><span class="o">=</span><span class="mi">4</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;shrpop&quot;</span><span class="p">]</span><span class="o">&gt;</span><span class="mf">0.8</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;shrpop&quot;</span><span class="p">]</span><span class="o">&lt;=</span><span class="mi">1</span><span class="p">),</span><span class="s2">&quot;quintil&quot;</span><span class="p">]</span><span class="o">=</span><span class="mi">5</span>
+
+    <span class="c1"># Calculamos el IPCF promedio de ese quintil</span>
+    <span class="n">media_q1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">average</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;quintil&quot;</span><span class="p">]</span><span class="o">==</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;ipcf&quot;</span><span class="p">],</span> 
+                          <span class="n">weights</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;quintil&quot;</span><span class="p">]</span><span class="o">==</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;pondera&quot;</span><span class="p">])</span>
+    
+    <span class="c1"># Calculamos el IPCF promedio de ese quintil</span>
+    <span class="n">media_q5</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">average</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;quintil&quot;</span><span class="p">]</span><span class="o">==</span><span class="mi">5</span><span class="p">,</span> <span class="s2">&quot;ipcf&quot;</span><span class="p">],</span> 
+                          <span class="n">weights</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;quintil&quot;</span><span class="p">]</span><span class="o">==</span><span class="mi">5</span><span class="p">,</span> <span class="s2">&quot;pondera&quot;</span><span class="p">])</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Utilizando&#39;</span><span class="p">,</span> <span class="n">style</span><span class="o">.</span><span class="n">italic</span> <span class="o">+</span> <span class="n">name</span> <span class="o">+</span> <span class="n">style</span><span class="o">.</span><span class="n">endc</span><span class="p">,</span><span class="s1">&#39;el cociente de quintiles es igual a&#39;</span><span class="p">,</span> <span class="n">style</span><span class="o">.</span><span class="n">green</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="si">{:.0f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">media_q5</span><span class="o">/</span><span class="n">media_q1</span><span class="p">)</span> <span class="o">+</span> <span class="n">style</span><span class="o">.</span><span class="n">endc</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Utilizando <span class=" -Color -Color-Green">df_ecu</span> el cociente de quintiles es igual a <span class=" -Color -Color-Bold -Color-Bold-Green">20</span>
+Utilizando <span class=" -Color -Color-Green">df_mex</span> el cociente de quintiles es igual a <span class=" -Color -Color-Bold -Color-Bold-Green">13</span>
+Utilizando <span class=" -Color -Color-Green">df_nic</span> el cociente de quintiles es igual a <span class=" -Color -Color-Bold -Color-Bold-Green">15</span>
+Utilizando <span class=" -Color -Color-Green">df_per</span> el cociente de quintiles es igual a <span class=" -Color -Color-Bold -Color-Bold-Green">14</span>
+Utilizando <span class=" -Color -Color-Green">df_pan</span> el cociente de quintiles es igual a <span class=" -Color -Color-Bold -Color-Bold-Green">23</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Los valores obtenidos indican que la mayor brecha de quintiles extremos se da en Panamá, cuyo quintil 5 es 23 veces más alto que el del quintil 1.</p>
+</section>
+<section id="replicar-programa-ratq51">
+<h2>3.2 Replicar programa ratq51<a class="headerlink" href="#replicar-programa-ratq51" title="Permalink to this headline">#</a></h2>
+<p><a class="reference external" href="https://drive.google.com/file/d/1MwQrMylnYL0VHrLRM3JafsCBE9NkisAJ/view"><em><strong>Páginas 153-154</strong></em></a></p>
+<p>En la siguientes líneas de código proponemos escribir una función que permite computar el cociente de quintiles extremos muy fácilmente. Se define una función llamada <em>ratq51</em> que tiene como argumento la variable a utilizar <em>x</em> y opcionalmente el ponderador <em>weight</em>. Notarán que a diferencia de la función en Stata aquí no se incluye ningún condicional dentro de los argumentos de la función, esto es debido a que la misma se realiza implícitamente al indicar la base de datos a utilizar. Como aprendimos antes, podemos filtrar las observaciones que queremos utilizar y ubicar la sentencia dentro del argumento data. Por ejemplo, si quisieramos realizar el cálculo sobre la región 1 podríamos hacer lo siguiente:</p>
+<p><code class="docutils literal notranslate"><span class="pre">ratq51(df.loc[df['region']==1,:],</span> <span class="pre">...)</span></code></p>
+<p>La creación de <code class="docutils literal notranslate"><span class="pre">ratq51()</span></code> se realiza mediante un método alternativo al que vimos en <code class="docutils literal notranslate"><span class="pre">descriptive_stats()</span></code> del capítulo 2. Como argumento primero establecemos la base de datos que necesitará la función, denominado <em>data</em>, y a continuación la variable que nos interesa dentro del dataset indicado. ¿Podríamos haber pasado directamente el vector de interés a la función? Por supuesto que sí, el contenido de la función sería un poco diferente, pero se podría como alternativa. Aunque para mostrar otra forma de encarar la elaboración de una función, se decidió optar por un camino alterno, donde primero indicamos la base de datos y posteriormente los nombres de la columna que interesan para ejecutar la función. Esto se deriva en que necesitamos indicar obligatoriamente un <em>dataset</em> y una columna de interés que se encuentre dentro de este, lo cual será evaluado en primera instancia como error fatal. De no cumplirse esto, la función arrojará un error. En el caso del ponderador, este no corre la misma suerte que los argumentos explicados antes. El factor de expansión es opcional, por lo que al no indicarlo la función computará el ratio sin ponderar. Lo que sigue es exactamente lo mismo que calculamos en la rutina anterior, con la diferencia de que readaptamos el código para volver al procedimiento uno genérico.</p>
+<p>Un detalle no menor se encuentra también en la forma de definir la variable <em>x</em> y el ponderador <em>weight</em> como argumentos de la función. El hecho de definir a ambas como string con la opción <code class="docutils literal notranslate"><span class="pre">str</span></code> hace que la función automáticamente entienda a ambos como caracteres, en vez de algún otro <em>type</em>, por lo que en el desarrollo de la función cada vez que nombramos a los argumentos lo podemos hacer sin incluir las comillas <code class="docutils literal notranslate"><span class="pre">''</span></code>. Mientras que al ejecutar dicha función se especifican los nombres de las variables entre comillas <code class="docutils literal notranslate"><span class="pre">''</span></code>. Por último, al seguir la ejecución del ratio de quintiles extremos realizado antes la función estaría filtrando el dataframe con valores mayores a cero.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">ratq51</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span><span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">weight</span><span class="p">:</span><span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+    <span class="c1">### Errores fatales</span>
+    <span class="c1"># Falta especificar dataset</span>
+    <span class="k">if</span> <span class="n">data</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Falta asignar valor a x&#39;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">pass</span>
+    <span class="c1"># Falta indicar una variable dentro del dataframe a utilizar</span>
+    <span class="k">if</span> <span class="n">x</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Falta asignar valor a x&#39;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">pass</span>
+    <span class="c1"># Como el ponderador es opcional, contemplamos ambas posibilidades</span>
+    <span class="k">if</span> <span class="n">weight</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">x</span><span class="p">]</span>
+        <span class="n">df</span><span class="p">[</span><span class="n">weight</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="o">*</span><span class="mi">0</span><span class="o">+</span><span class="mi">1</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="n">weight</span><span class="p">]]</span>
+    <span class="c1"># Creamos el shrpop  </span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="p">[</span><span class="n">x</span><span class="p">])</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="n">x</span><span class="p">]</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span><span class="s2">&quot;shrpop&quot;</span><span class="p">]</span><span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">weight</span><span class="p">]</span><span class="o">.</span><span class="n">cumsum</span><span class="p">()</span>
+    <span class="n">df</span><span class="p">[</span><span class="s2">&quot;shrpop&quot;</span><span class="p">]</span><span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;shrpop&quot;</span><span class="p">]</span><span class="o">/</span> <span class="n">df</span><span class="p">[</span><span class="n">weight</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+    
+    <span class="c1"># Identificar quintiles</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;shrpop&quot;</span><span class="p">]</span><span class="o">&lt;=</span><span class="mf">0.2</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;shrpop&quot;</span><span class="p">]</span><span class="o">&gt;=</span><span class="mi">0</span><span class="p">),</span><span class="s2">&quot;quintil&quot;</span><span class="p">]</span><span class="o">=</span><span class="mi">1</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;shrpop&quot;</span><span class="p">]</span><span class="o">&gt;</span><span class="mf">0.2</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;shrpop&quot;</span><span class="p">]</span><span class="o">&lt;=</span><span class="mf">0.4</span><span class="p">),</span><span class="s2">&quot;quintil&quot;</span><span class="p">]</span><span class="o">=</span><span class="mi">2</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;shrpop&quot;</span><span class="p">]</span><span class="o">&gt;</span><span class="mf">0.4</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;shrpop&quot;</span><span class="p">]</span><span class="o">&lt;=</span><span class="mf">0.6</span><span class="p">),</span><span class="s2">&quot;quintil&quot;</span><span class="p">]</span><span class="o">=</span><span class="mi">3</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;shrpop&quot;</span><span class="p">]</span><span class="o">&gt;</span><span class="mf">0.6</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;shrpop&quot;</span><span class="p">]</span><span class="o">&lt;=</span><span class="mf">0.8</span><span class="p">),</span><span class="s2">&quot;quintil&quot;</span><span class="p">]</span><span class="o">=</span><span class="mi">4</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;shrpop&quot;</span><span class="p">]</span><span class="o">&gt;</span><span class="mf">0.8</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;shrpop&quot;</span><span class="p">]</span><span class="o">&lt;=</span><span class="mi">1</span><span class="p">),</span><span class="s2">&quot;quintil&quot;</span><span class="p">]</span><span class="o">=</span><span class="mi">5</span>
+    
+    <span class="c1"># Calculamos el IPCF promedio de ese quintil</span>
+    <span class="n">media_q1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">average</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;quintil&quot;</span><span class="p">]</span><span class="o">==</span><span class="mi">1</span><span class="p">,</span> <span class="n">x</span><span class="p">],</span> 
+                          <span class="n">weights</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;quintil&quot;</span><span class="p">]</span><span class="o">==</span><span class="mi">1</span><span class="p">,</span> <span class="n">weight</span><span class="p">])</span>
+    
+    <span class="c1"># Calculamos el IPCF promedio de ese quintil</span>
+    <span class="n">media_q5</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">average</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;quintil&quot;</span><span class="p">]</span><span class="o">==</span><span class="mi">5</span><span class="p">,</span> <span class="n">x</span><span class="p">],</span> 
+                          <span class="n">weights</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;quintil&quot;</span><span class="p">]</span><span class="o">==</span><span class="mi">5</span><span class="p">,</span> <span class="n">weight</span><span class="p">])</span>
+
+    <span class="k">return</span> <span class="n">media_q5</span><span class="o">/</span><span class="n">media_q1</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">mode</span><span class="o">.</span><span class="n">chained_assignment</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># default=&#39;warn&#39; https://stackoverflow.com/questions/20625582/how-to-deal-with-settingwithcopywarning-in-pandas</span>
+<span class="c1">#Volvemos a calcular el ratio para todas las bases pero utilizando la nueva funcion y almacenando los resultados en un df</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Pais&#39;</span><span class="p">,</span> <span class="s1">&#39;Año&#39;</span><span class="p">,</span> <span class="s1">&#39;Q5/Q1&#39;</span><span class="p">])</span>
+<span class="n">results</span><span class="p">[</span><span class="s1">&#39;Pais&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Ecuador&#39;</span><span class="p">,</span> <span class="s1">&#39;Mexico&#39;</span><span class="p">,</span> <span class="s1">&#39;Nicaragua&#39;</span><span class="p">,</span> <span class="s1">&#39;Peru&#39;</span><span class="p">,</span> <span class="s1">&#39;Panama&#39;</span><span class="p">]</span>
+<span class="n">results</span><span class="p">[</span><span class="s1">&#39;Año&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;2006&#39;</span><span class="p">,</span> <span class="s1">&#39;2006&#39;</span><span class="p">,</span> <span class="s1">&#39;2005&#39;</span><span class="p">,</span> <span class="s1">&#39;2006&#39;</span><span class="p">,</span> <span class="s1">&#39;2006&#39;</span><span class="p">]</span>
+
+<span class="n">j</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">dfs</span><span class="p">:</span>    
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df_todos</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
+    <span class="n">results</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="s1">&#39;Q5/Q1&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ratq51</span><span class="p">(</span><span class="n">data</span> <span class="o">=</span> <span class="n">df</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span><span class="s1">&#39;ipcf&#39;</span><span class="p">,</span> <span class="n">weight</span> <span class="o">=</span> <span class="s1">&#39;pondera&#39;</span><span class="p">)</span>
+    <span class="n">j</span> <span class="o">=</span> <span class="n">j</span> <span class="o">+</span> <span class="mi">1</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Verificamos que los resultados se hayan almacenado correctamente</span>
+<span class="n">results</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Pais</th>
+      <th>Año</th>
+      <th>Q5/Q1</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Ecuador</td>
+      <td>2006</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Mexico</td>
+      <td>2006</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Nicaragua</td>
+      <td>2005</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Peru</td>
+      <td>2006</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Panama</td>
+      <td>2006</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="replicar-programa-gcuan">
+<h2>3.3 Replicar programa gcuan<a class="headerlink" href="#replicar-programa-gcuan" title="Permalink to this headline">#</a></h2>
+<p><a class="reference external" href="https://drive.google.com/file/d/1MwQrMylnYL0VHrLRM3JafsCBE9NkisAJ/view"><em><strong>Páginas 154-155</strong></em></a></p>
+<p>El bloque de código a continuación permite identificar cuantiles de cualquier variable. En términos de la función <code class="docutils literal notranslate"><span class="pre">ratq51()</span></code> nos permite generar variables similares al quintil pero que pueden identificar también deciles, ventiles, percentiles, etc.</p>
+<p>Por esta razón, esta función tendrá más argumentos, aquí además de los anteriores debemos detallar la cantidad de cuantiles a generar (argumento <em>num</em>) y la variable que los almacena (<em>newvar</em>). Esta última tendrá como nombre por defecto <em>‘cuantil’</em>, pero el usuario podría asignar el nombre que desea (siempre entre comillas). Notar que aquí <em>weight</em> sigue siendo opcional, de no agregarse el código realizará los cálculos sin factor de expansión. No obstante, la forma de comprobar la existencia del ponderador se realiza a través de la función <code class="docutils literal notranslate"><span class="pre">len()</span></code>, que verifica si hay una longitud positiva de la serie que se va a utilizar como factor de expansión, la cual representa una manera alternativa de realizar el chequeo.</p>
+<p>Luego el código y la secuencia son idénticos a la de la función anterior, salvo que aquí el objeto “num” indica cuantos cuantiles deben generarse, haciendo iterar al bucle “num” cantidad de veces, y define los intervalos de población acumulada de forma equivalente. Por ejemplo, si queremos generar deciles (num=10), necesitamos 10 cuantiles y cada cuantil se asigna en intervalos de población acumulada iguales a 0.10 (1/10). Una vez identificado los cuantiles <code class="docutils literal notranslate"><span class="pre">gcuan()</span></code> computa la media, el desvío estándar y la cantidad de observaciones para cada cuantil y asigna los resultados a un <em>dataframe</em> llamado <em>result</em>, el cual es impreso como output de la función,</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">gcuan</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">num</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">weight</span><span class="p">,</span> <span class="n">newvar</span> <span class="o">=</span> <span class="s1">&#39;cuantil&#39;</span><span class="p">):</span>
+    <span class="nb">dict</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">if</span> <span class="nb">int</span><span class="p">(</span><span class="n">num</span><span class="p">)</span><span class="o">!=</span> <span class="n">num</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Los cuantiles tienen que ser números enteros&#39;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">pass</span>
+    
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">weight</span><span class="p">)</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+        <span class="n">weight</span> <span class="o">=</span> <span class="n">x</span><span class="o">*</span><span class="mi">0</span><span class="o">+</span><span class="mi">1</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">weight</span> <span class="o">=</span> <span class="n">weight</span> 
+
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">x</span><span class="p">,</span> <span class="n">weight</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">keys</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;weight&#39;</span><span class="p">])</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">])</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;x&quot;</span><span class="p">]</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span><span class="s2">&quot;shrpop&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;weight&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">cumsum</span><span class="p">()</span>
+    <span class="n">df</span><span class="p">[</span><span class="s2">&quot;shrpop&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;shrpop&quot;</span><span class="p">]</span><span class="o">/</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;weight&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>    
+
+    <span class="n">shrcuantil</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="n">num</span>
+
+    <span class="n">df</span><span class="p">[</span><span class="n">newvar</span><span class="p">]</span><span class="o">=</span><span class="mi">0</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">num</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+        
+        <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;shrpop&#39;</span><span class="p">]</span><span class="o">&gt;</span><span class="p">(</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">shrcuantil</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;shrpop&#39;</span><span class="p">]</span><span class="o">&lt;=</span><span class="n">i</span><span class="o">*</span><span class="n">shrcuantil</span><span class="p">),</span> <span class="n">newvar</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span> 
+
+    <span class="n">result</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;mean&#39;</span><span class="p">:</span><span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="n">newvar</span><span class="p">],</span> <span class="n">group_keys</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">average</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="n">x</span><span class="o">.</span><span class="n">weight</span><span class="p">)),</span>
+                          <span class="s1">&#39;std&#39;</span><span class="p">:</span><span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="n">newvar</span><span class="p">],</span> <span class="n">group_keys</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">average</span><span class="p">((</span><span class="n">x</span><span class="o">.</span><span class="n">x</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">average</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="n">x</span><span class="o">.</span><span class="n">weight</span><span class="p">))</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="n">x</span><span class="o">.</span><span class="n">weight</span><span class="p">))),</span>
+                          <span class="s1">&#39;obs&#39;</span><span class="p">:</span><span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="n">newvar</span><span class="p">],</span> <span class="n">group_keys</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">weight</span><span class="o">.</span><span class="n">sum</span><span class="p">())})</span>
+    <span class="k">return</span> <span class="n">result</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Para probar la función, utilizamos el <em>dataframe</em> de México dentro del diccionario <em>df_todos</em>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Aplicamos la funcion creando 5 cuantiles en la base de Ecuador </span>
+<span class="n">gcuan</span><span class="p">(</span><span class="n">df_todos</span><span class="p">[</span><span class="s1">&#39;df_mex&#39;</span><span class="p">][</span><span class="s1">&#39;ipcf&#39;</span><span class="p">],</span> <span class="mi">5</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="n">df_todos</span><span class="p">[</span><span class="s1">&#39;df_mex&#39;</span><span class="p">][</span><span class="s1">&#39;pondera&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>mean</th>
+      <th>std</th>
+      <th>obs</th>
+    </tr>
+    <tr>
+      <th>cuantil</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>499.297821</td>
+      <td>197.360522</td>
+      <td>20372798</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1011.521729</td>
+      <td>136.702824</td>
+      <td>20387336</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1539.610107</td>
+      <td>172.706381</td>
+      <td>20381024</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2382.652832</td>
+      <td>345.381707</td>
+      <td>20380795</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>6707.636230</td>
+      <td>6531.797609</td>
+      <td>20381791</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="tamano-de-los-hogares">
+<h2>3.4 Tamaño de los hogares<a class="headerlink" href="#tamano-de-los-hogares" title="Permalink to this headline">#</a></h2>
+<p><a class="reference external" href="https://drive.google.com/file/d/1MwQrMylnYL0VHrLRM3JafsCBE9NkisAJ/view"><em><strong>Páginas 156</strong></em></a></p>
+<p>El código siguiente puede utilizarse para computar las estadísticas sobre proporción de hogares unipersonales y multipersonales presentadas en el cuadro 3.4 del texto. Con este código podremos calcular qué proporción del total de hogares se compone de 1, 2, 3, 4,…, n miembros y combinado con los códigos anteriores, analizar cómo esta configuración cambia al agrupar por regiones, percentil de ingreso, condición de pobreza, etc.</p>
+<p>En primer lugar, cargamos las bases que vamos a utilizar, las cuales son representativas de los países de Honduras, México, República Dominicana y Uruguay. Las mismas son improtadas y guardadas en el diccionario <em>df_todos</em>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_todos</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">links</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;1pLly5AnoWj9fPyBcBZ8bCgDWqZ1eppgD&quot;</span><span class="p">,</span> <span class="s2">&quot;1udEv9SNL9IiOCmfXg8MLdru1v9C_Sds2&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;1BxiFvCMrUSjDsgYs73-1yi2cGMuKJV22&quot;</span><span class="p">,</span> <span class="s2">&quot;1XI6dexijKCd2jIZlyZfV6C9sAU2mq39y&quot;</span><span class="p">]</span>
+<span class="n">dfs</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;df_hon&quot;</span><span class="p">,</span> <span class="s2">&quot;df_mex&quot;</span><span class="p">,</span> <span class="s2">&quot;df_dom&quot;</span><span class="p">,</span> <span class="s2">&quot;df_ury&quot;</span><span class="p">]</span>
+<span class="n">cnt</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Honduras&quot;</span><span class="p">,</span> <span class="s2">&quot;México&quot;</span><span class="p">,</span> <span class="s2">&quot;Rep. Dominicana&quot;</span><span class="p">,</span> <span class="s2">&quot;Uruguay&quot;</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">links</span><span class="p">)):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;iteration</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">: </span><span class="si">{</span><span class="n">style</span><span class="o">.</span><span class="n">green</span><span class="si">}{</span><span class="n">dfs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">}{</span><span class="n">style</span><span class="o">.</span><span class="n">endc</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="n">df_todos</span><span class="p">[</span><span class="n">dfs</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_stata</span><span class="p">(</span><span class="s1">&#39;https://drive.google.com/uc?id=&#39;</span> <span class="o">+</span> <span class="n">links</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> 
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="c1"># restringimos la velocidad de cada query  </span>
+<span class="n">df_todos</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>iteration0: <span class=" -Color -Color-Bold -Color-Bold-Green">df_hon</span>
+iteration1: <span class=" -Color -Color-Bold -Color-Bold-Green">df_mex</span>
+iteration2: <span class=" -Color -Color-Bold -Color-Bold-Green">df_dom</span>
+iteration3: <span class=" -Color -Color-Bold -Color-Bold-Green">df_ury</span>
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;df_hon&#39;:             id                 depto  munic  numhog  com  \
+ 0      1002641  8. francisco morazan    1.0       1    1   
+ 1      1002641  8. francisco morazan    1.0       1    4   
+ 2      1002641  8. francisco morazan    1.0       1    3   
+ 3      1002641  8. francisco morazan    1.0       1    2   
+ 4      1005151  8. francisco morazan    1.0       1    1   
+ ...        ...                   ...    ...     ...  ...   
+ 99640  5185651              18. yoro   11.0       1    2   
+ 99641  5185751              18. yoro   11.0       1    1   
+ 99642  5185751              18. yoro   11.0       1    2   
+ 99643  5185751              18. yoro   11.0       1    4   
+ 99644  5185751              18. yoro   11.0       1    3   
+ 
+                           relacion  edad  totper  \
+ 0                1. jefe del hogar  40.0       4   
+ 1                         3. hijos   8.0       4   
+ 2                         3. hijos  11.0       4   
+ 3                         3. hijos  21.0       4   
+ 4                1. jefe del hogar  42.0       4   
+ ...                            ...   ...     ...   
+ 99640                     3. hijos   9.0       5   
+ 99641            1. jefe del hogar  29.0       4   
+ 99642  2. esposa(o) o compañera(o)  18.0       4   
+ 99643                     3. hijos   0.0       4   
+ 99644                     3. hijos   2.0       4   
+ 
+                                              p07  \
+ 0      33405 perito mercantil y contador público   
+ 1                                            NaN   
+ 2                                            NaN   
+ 3                              67204 odontología   
+ 4                63203 comunicación y publicidad   
+ ...                                          ...   
+ 99640                                        NaN   
+ 99641                                        NaN   
+ 99642                                        NaN   
+ 99643                                        NaN   
+ 99644                                        NaN   
+ 
+                                 p08  ...   p_reg         ipc pipcf dipcf  \
+ 0      presencial en centro privado  ...  1.0000  159.300003   1.0   1.0   
+ 1      presencial en centro público  ...  1.0000  159.300003   1.0   1.0   
+ 2      presencial en centro público  ...  1.0000  159.300003   1.0   1.0   
+ 3      presencial en centro público  ...  1.0000  159.300003   1.0   1.0   
+ 4      presencial en centro privado  ...  1.0000  159.300003   1.0   1.0   
+ ...                             ...  ...     ...         ...   ...   ...   
+ 99640                           NaN  ...  0.8695  159.300003   NaN   NaN   
+ 99641  presencial en centro público  ...  0.8695  159.300003   NaN   NaN   
+ 99642  presencial en centro público  ...  0.8695  159.300003   NaN   NaN   
+ 99643                           NaN  ...  0.8695  159.300003   NaN   NaN   
+ 99644                           NaN  ...  0.8695  159.300003   NaN   NaN   
+ 
+       p_ing_ofi d_ing_ofi piea qiea iol ionl  
+ 0           NaN       NaN  1.0  1.0 NaN  NaN  
+ 1           NaN       NaN  1.0  1.0 NaN  NaN  
+ 2           NaN       NaN  1.0  1.0 NaN  NaN  
+ 3           NaN       NaN  1.0  1.0 NaN  NaN  
+ 4           NaN       NaN  1.0  1.0 NaN  NaN  
+ ...         ...       ...  ...  ...  ..  ...  
+ 99640      17.0       2.0  NaN  NaN NaN  NaN  
+ 99641      72.0       8.0  NaN  NaN NaN  NaN  
+ 99642      72.0       8.0  NaN  NaN NaN  NaN  
+ 99643      72.0       8.0  NaN  NaN NaN  NaN  
+ 99644      72.0       8.0  NaN  NaN NaN  NaN  
+ 
+ [99645 rows x 246 columns],
+ &#39;df_mex&#39;:        edad     id  pondera  hombre  region  urbano  nivel           ipcf
+ 0        97     38     1098       0       4       1    0.0       0.000000
+ 1        23    108       98       1       4       0    2.0       0.000000
+ 2        19    108       98       0       4       0    3.0       0.000000
+ 3        72    161      638       0       4       1    0.0       0.000000
+ 4        90    161      638       0       4       1    0.0       0.000000
+ ...     ...    ...      ...     ...     ...     ...    ...            ...
+ 81999    17  16587      607       0       1       0    3.0  109714.742188
+ 82000    65  15205     1159       1       2       1    6.0  144282.562500
+ 82001    61  15205     1159       0       2       1    3.0  144282.562500
+ 82002    34  11028     2098       1       4       1    6.0  165842.015625
+ 82003    48   8710      798       1       5       1    6.0  192500.000000
+ 
+ [82004 rows x 8 columns],
+ &#39;df_dom&#39;:       pais   ano           encuesta    id  com  pondera  relacion  hogarsec  \
+ 0      dom  2006  ENFT onda Octubre  2907    1      285         1         0   
+ 1      dom  2006  ENFT onda Octubre  2998    1      190         1         0   
+ 2      dom  2006  ENFT onda Octubre  2998    2      190         2         0   
+ 3      dom  2006  ENFT onda Octubre  2998    4      190         3         0   
+ 4      dom  2006  ENFT onda Octubre  2998    3      190         3         0   
+ ...    ...   ...                ...   ...  ...      ...       ...       ...   
+ 28650  dom  2006  ENFT onda Octubre  5117    1      412         1         0   
+ 28651  dom  2006  ENFT onda Octubre  5117    2      412         2         0   
+ 28652  dom  2006  ENFT onda Octubre  5117    4      412         3         0   
+ 28653  dom  2006  ENFT onda Octubre  5117    3      412         3         0   
+ 28654  dom  2006  ENFT onda Octubre  5117    5      412         5         0   
+ 
+        hogar  miembros  ...  lp_moderada  ing_pob_mod_lp   p_reg         ipc  \
+ 0        1.0         1  ...  2181.820068        0.000000  1.0000  248.800003   
+ 1        1.0         4  ...  2181.820068        0.000000  1.0000  248.800003   
+ 2        NaN         4  ...  2181.820068        0.000000  1.0000  248.800003   
+ 3        NaN         4  ...  2181.820068        0.000000  1.0000  248.800003   
+ 4        NaN         4  ...  2181.820068        0.000000  1.0000  248.800003   
+ ...      ...       ...  ...          ...             ...     ...         ...   
+ 28650    1.0         5  ...  2181.820068       89.599823  0.8695  248.800003   
+ 28651    NaN         5  ...  2181.820068       89.599823  0.8695  248.800003   
+ 28652    NaN         5  ...  2181.820068       89.599823  0.8695  248.800003   
+ 28653    NaN         5  ...  2181.820068       89.599823  0.8695  248.800003   
+ 28654    NaN         5  ...  2181.820068       89.599823  0.8695  248.800003   
+ 
+        pipcf  dipcf  p_ing_ofi  d_ing_ofi  piea  qiea  
+ 0          1      1          1          1     1     1  
+ 1          1      1          1          1     1     1  
+ 2          1      1          1          1     1     1  
+ 3          1      1          1          1     1     1  
+ 4          1      1          1          1     1     1  
+ ...      ...    ...        ...        ...   ...   ...  
+ 28650    100     10        100         10   100     5  
+ 28651    100     10        100         10   100     5  
+ 28652    100     10        100         10   100     5  
+ 28653    100     10        100         10   100     5  
+ 28654    100     10        100         10   100     5  
+ 
+ [28655 rows x 192 columns],
+ &#39;df_ury&#39;:         correlativ  mes  dpto  region_ech  estrato  nper  ms36  mt26  \
+ 0             1064    1     1          14        4     1     0     0   
+ 1             1064    1     1          14        4     2     0     0   
+ 2            13630    7     1          11        1     1     2     0   
+ 3            22042    4     1          12        2     1     0     0   
+ 4            23077    6     1          12        2     1     0     0   
+ ...            ...  ...   ...         ...      ...   ...   ...   ...   
+ 177723      137127    4     3          19        9     2     0     0   
+ 177724      137127    4     3          19        9     3     0     2   
+ 177725      137169    4     1          13        3     2     0     0   
+ 177726      137205    3     1          13        3     2     0     0   
+ 177727      137340    3    18          17        7     2     0     0   
+ 
+         pobpcoac  pesotri  ...  lp_moderada  ing_pob_mod_lp   ipc_rel  p_reg  \
+ 0              4      103  ...  3397.221436        0.000000  1.000000      1   
+ 1              6      103  ...  3397.221436        0.000000  1.000000      1   
+ 2              4       31  ...  3456.151123        0.891666  1.038800      1   
+ 3              4       57  ...  3586.987305        0.000000  1.023677      1   
+ 4              2       57  ...  3652.507812        0.000000  1.035491      1   
+ ...          ...      ...  ...          ...             ...       ...    ...   
+ 177723         2      135  ...  2250.114746        2.645791  1.023677      1   
+ 177724         2      135  ...  2250.114746        2.645791  1.023677      1   
+ 177725         2       75  ...  3492.593018        4.312698  1.023677      1   
+ 177726         2       75  ...  3575.131348        3.215546  1.020416      1   
+ 177727         2       29  ...          NaN             NaN  1.020416      1   
+ 
+        pipcf  dipcf  p_ing_ofi  d_ing_ofi  piea  qiea  
+ 0        1.0    1.0        1.0        1.0   1.0   1.0  
+ 1        1.0    1.0        1.0        1.0   1.0   1.0  
+ 2        1.0    1.0       22.0        3.0   1.0   1.0  
+ 3        1.0    1.0        1.0        1.0   1.0   1.0  
+ 4        1.0    1.0        1.0        1.0   1.0   1.0  
+ ...      ...    ...        ...        ...   ...   ...  
+ 177723   NaN    NaN       74.0        8.0   NaN   NaN  
+ 177724   NaN    NaN       74.0        8.0   NaN   NaN  
+ 177725   NaN    NaN       90.0        9.0   NaN   NaN  
+ 177726   NaN    NaN       81.0        9.0   NaN   NaN  
+ 177727   NaN    NaN        NaN        NaN   NaN   NaN  
+ 
+ [177728 rows x 233 columns]}
+</pre></div>
+</div>
+</div>
+</div>
+<p>A continuación, pasamos a calcular la proporción de hogares según tamaño o cantidad de integrantes para cada país. Para hacerlo, realizamos el siguiente procedimiento para cada país:</p>
+<ol class="simple">
+<li><p>ordenamos las observaciones según <em>id</em> de forma ascendente y jefe de hogar de manera descendente, e identificamos al primer integrante de cada hogar</p></li>
+<li><p>creamos una variable unitaria <em>aux</em> que utilizamos para sumar la cantidad de integrantes por hogar</p></li>
+<li><p>creamos la variable <em>tamanio</em> que va a representar la cantidad de miembros por hogar, truncando en 6, es decir, el valor 6 representará la condición <code class="docutils literal notranslate"><span class="pre">...&gt;=6</span></code></p></li>
+<li><p>una vez que creamos <em>tamanio</em> filtramos la base para quedarnos solamente con una observación del hogar, en nuestro caso la primera de cada <em>id</em> que sería el jefe de hogar. También, realizamos un filtro para quedarnos con hogares con al menos un miembro</p></li>
+<li><p>agregamos las observaciones por cantidad de miembros en el hogar, sumando cada observación utilizando su ponderador. Al quedarnos solamente con una observación por hogar esta suma equivale a la suma de hogares por cantidad de miembros. Luego, calculamos su frecuencia realtiva</p></li>
+<li><p>el output generado para cada país es unido a la base final <em>df_total</em></p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Creamos nuevas columnas con la cantidad de miembros por hogar y una clasificacion de tamaño</span>
+<span class="n">df_total</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;tamanio&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]}</span>
+<span class="n">df_total</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">df_total</span><span class="p">)</span>
+<span class="n">c</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">df_todos</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;iteration</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">: </span><span class="si">{</span><span class="n">style</span><span class="o">.</span><span class="n">green</span><span class="si">}{</span><span class="n">name</span><span class="si">}{</span><span class="n">style</span><span class="o">.</span><span class="n">endc</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df_todos</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+    <span class="n">df</span><span class="p">[</span><span class="s2">&quot;tag_hogar&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">cumcount</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span>
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;aux&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span> 
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;miembros&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">)[</span><span class="s1">&#39;aux&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="nb">sum</span><span class="p">)</span>
+
+    <span class="n">df</span><span class="p">[</span><span class="s2">&quot;tamanio&quot;</span><span class="p">]</span><span class="o">=</span><span class="mi">0</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;miembros&quot;</span><span class="p">]</span><span class="o">==</span><span class="mi">1</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;tag_hogar&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="kc">True</span><span class="p">),</span><span class="s2">&quot;tamanio&quot;</span><span class="p">]</span><span class="o">=</span> <span class="mi">1</span> <span class="c1">#Hogar unipersonal</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;miembros&quot;</span><span class="p">]</span><span class="o">==</span><span class="mi">2</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;tag_hogar&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="kc">True</span><span class="p">),</span><span class="s2">&quot;tamanio&quot;</span><span class="p">]</span><span class="o">=</span> <span class="mi">2</span> <span class="c1">#Hogar de dos personas</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;miembros&quot;</span><span class="p">]</span><span class="o">==</span><span class="mi">3</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;tag_hogar&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="kc">True</span><span class="p">),</span><span class="s2">&quot;tamanio&quot;</span><span class="p">]</span><span class="o">=</span> <span class="mi">3</span> <span class="c1">#Hogar de tres personas</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;miembros&quot;</span><span class="p">]</span><span class="o">==</span><span class="mi">4</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;tag_hogar&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="kc">True</span><span class="p">),</span><span class="s2">&quot;tamanio&quot;</span><span class="p">]</span><span class="o">=</span> <span class="mi">4</span> <span class="c1">#Hogar de cuatro personas</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;miembros&quot;</span><span class="p">]</span><span class="o">==</span><span class="mi">5</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;tag_hogar&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="kc">True</span><span class="p">),</span><span class="s2">&quot;tamanio&quot;</span><span class="p">]</span><span class="o">=</span> <span class="mi">5</span> <span class="c1">#Hogar de cinco personas</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;miembros&quot;</span><span class="p">]</span><span class="o">&gt;=</span><span class="mi">6</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;tag_hogar&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="kc">True</span><span class="p">),</span><span class="s2">&quot;tamanio&quot;</span><span class="p">]</span><span class="o">=</span> <span class="mi">6</span> <span class="c1">#Hogar de seis personas o mas</span>
+    
+    <span class="c1"># Creamos un nuevo data frame con la cantidad de observaciones para cada categoria de tamaño y su porcentaje respecto al total</span>
+    <span class="n">df_agg</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;tag_hogar&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="kc">True</span><span class="p">]</span> <span class="c1"># Nos quedamos solo con un miembro del hogar</span>
+    <span class="n">df_agg</span> <span class="o">=</span> <span class="n">df_agg</span><span class="p">[</span><span class="n">df_agg</span><span class="p">[</span><span class="s1">&#39;tamanio&#39;</span><span class="p">]</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">]</span> <span class="c1"># Descartamos las observaciones con valor igual a 0</span>
+    <span class="n">df_agg</span> <span class="o">=</span> <span class="n">df_agg</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;tamanio&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">agg</span><span class="p">({</span><span class="s1">&#39;pondera&#39;</span><span class="p">:</span><span class="s1">&#39;sum&#39;</span><span class="p">})</span> 
+    <span class="n">df_agg</span><span class="p">[</span><span class="s1">&#39;porcentaje&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_agg</span><span class="p">[</span><span class="s1">&#39;pondera&#39;</span><span class="p">]</span><span class="o">/</span><span class="n">df_agg</span><span class="p">[</span><span class="s2">&quot;pondera&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">*</span><span class="mi">100</span>
+    <span class="n">df_agg</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;total&#39;</span><span class="p">,</span> <span class="n">cnt</span><span class="p">[</span><span class="n">c</span><span class="p">]]</span>
+    <span class="n">df_total</span> <span class="o">=</span> <span class="n">df_total</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df_agg</span><span class="p">[</span><span class="n">cnt</span><span class="p">[</span><span class="n">c</span><span class="p">]],</span> <span class="n">on</span> <span class="o">=</span> <span class="s1">&#39;tamanio&#39;</span><span class="p">)</span>
+    <span class="n">c</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="c1"># verificamos resultado post iteración en bucle</span>
+<span class="n">df_total</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>iteration3: <span class=" -Color -Color-Bold -Color-Bold-Green">df_hon</span>
+iteration3: <span class=" -Color -Color-Bold -Color-Bold-Green">df_mex</span>
+iteration3: <span class=" -Color -Color-Bold -Color-Bold-Green">df_dom</span>
+iteration3: <span class=" -Color -Color-Bold -Color-Bold-Green">df_ury</span>
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>tamanio</th>
+      <th>Honduras</th>
+      <th>México</th>
+      <th>Rep. Dominicana</th>
+      <th>Uruguay</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>5.153600</td>
+      <td>9.242860</td>
+      <td>12.293994</td>
+      <td>19.679599</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>10.046661</td>
+      <td>15.038548</td>
+      <td>16.486744</td>
+      <td>26.300074</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>15.484209</td>
+      <td>18.716443</td>
+      <td>19.655375</td>
+      <td>20.714957</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>18.804112</td>
+      <td>22.618685</td>
+      <td>20.578243</td>
+      <td>17.412574</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>18.067299</td>
+      <td>17.042021</td>
+      <td>15.664480</td>
+      <td>8.856082</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>6</td>
+      <td>32.444118</td>
+      <td>17.341442</td>
+      <td>15.321165</td>
+      <td>7.036713</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="distribucion-intrahogar">
+<h2>3.5 Distribución intrahogar<a class="headerlink" href="#distribucion-intrahogar" title="Permalink to this headline">#</a></h2>
+<p><a class="reference external" href="https://drive.google.com/file/d/1MwQrMylnYL0VHrLRM3JafsCBE9NkisAJ/view"><em><strong>Páginas 157</strong></em></a></p>
+<p>El fragmento de código siguiente puede utilizarse para generar resultados similares a los presentados en el cuadro 3.7 del texto, que muestra cómo se modifica la desigualdad calculada a través del cociente de deciles extremos cuando cambia la distribución del ingreso hacia el interior del hogar. Cabe recordar que la distribución del ingreso intrahogar se modifica mediante un impuesto proporcional al ingreso per cápita familiar combinado, con un subsidio que solo recibe el jefe de hogar. En la implementación, utilizamos quintiles en lugar de deciles ingreso.</p>
+<p>Para esta sección trabajaremos con diferentes bases nuevamente, por lo que podríamos pensar si no nos serviría una función que importe los países de interés. Sabemos hasta ahora que todas las bases corresponden a países en años específicos en formato <em>.dta</em>. Así que podríamos utilizar lo visto hasta ahora para crear una nueva función <code class="docutils literal notranslate"><span class="pre">import_dta()</span></code> cuyos argumentos sean los países que interesan y el/los años.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">import_dta</span><span class="p">(</span><span class="n">cnt</span><span class="p">,</span> <span class="n">year</span><span class="p">):</span>
+    <span class="c1"># list of possible countries </span>
+    <span class="n">countries</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;argentina_92&#39;</span><span class="p">:</span><span class="s2">&quot;1ICi2BF3YkQt2a_fBkxt00CV1_ipmsEIP&quot;</span><span class="p">,</span>
+                <span class="s1">&#39;argentina_06&#39;</span><span class="p">:</span><span class="s2">&quot;194pyYGovurVuCw8zpfqe2dJ7XAbYdG4s&quot;</span><span class="p">,</span>
+                <span class="s1">&#39;argentina2_06&#39;</span><span class="p">:</span><span class="s2">&quot;1IiHzxWrO-5dETM-jdiXx9ayP5PAqU0Yp&quot;</span><span class="p">,</span>
+                <span class="s1">&#39;honduras_06&#39;</span><span class="p">:</span><span class="s2">&quot;1pLly5AnoWj9fPyBcBZ8bCgDWqZ1eppgD&quot;</span><span class="p">,</span>
+                <span class="s1">&#39;mexico_06&#39;</span><span class="p">:</span><span class="s2">&quot;1udEv9SNL9IiOCmfXg8MLdru1v9C_Sds2&quot;</span><span class="p">,</span>
+                <span class="s1">&#39;republica_dominicana_06&#39;</span><span class="p">:</span><span class="s2">&quot;1BxiFvCMrUSjDsgYs73-1yi2cGMuKJV22&quot;</span><span class="p">,</span>
+                <span class="s1">&#39;uruguay_06&#39;</span><span class="p">:</span><span class="s2">&quot;1XI6dexijKCd2jIZlyZfV6C9sAU2mq39y&quot;</span><span class="p">,</span>
+                <span class="s1">&#39;ecuador_06&#39;</span><span class="p">:</span><span class="s2">&quot;1fgHKvdLDe3x5tCQheoXRL1JMGNDW0W7n&quot;</span><span class="p">,</span>
+                <span class="s1">&#39;nicaragua_05&#39;</span><span class="p">:</span><span class="s2">&quot;1ZBX4B4IrGPGIN9VwZLknaddCJ4AqAE07&quot;</span><span class="p">,</span>
+                <span class="s1">&#39;costa_rica_06&#39;</span><span class="p">:</span><span class="s2">&quot;17Bq2ee5cSdV0N_tqj4yiuMmOfJaDJ_LD&quot;</span><span class="p">,</span>
+                <span class="s1">&#39;peru_06&#39;</span><span class="p">:</span><span class="s2">&quot;1f5p2qF1N9tgqoQ-bdY8QMvzSnt2FCFWY&quot;</span><span class="p">,</span>
+                <span class="s1">&#39;panama_06&#39;</span><span class="p">:</span><span class="s2">&quot;1-a7OTv-I6SJXDhFhrCixbitx7KT4_lgx&quot;</span><span class="p">,</span>
+                <span class="s1">&#39;paraguay_07&#39;</span><span class="p">:</span><span class="s2">&quot;1DdvUN2auRHyDHX49gLpyBKD_mvulQpqN&quot;</span><span class="p">,</span>
+                <span class="s1">&#39;venezuela_06&#39;</span><span class="p">:</span><span class="s2">&quot;1En_N99oLlbDlQU1X60NLnBNKRXq8waUi&quot;</span><span class="p">,</span>
+                <span class="s1">&#39;bolivia_05&#39;</span><span class="p">:</span><span class="s2">&quot;1O4KAVOLNy9FCgW-YhPu8hkAQJ_kLgVr9&quot;</span><span class="p">,</span>
+                <span class="s1">&#39;brasil_07&#39;</span><span class="p">:</span><span class="s2">&quot;1uWBruRaNYDSy7LrYWFw8cQ1wQCQn80RA&quot;</span><span class="p">,</span>
+                <span class="s1">&#39;colombia_06&#39;</span><span class="p">:</span><span class="s2">&quot;1YNoQiSiHI3iGuHds7dsrcPVR6_eR_FaF&quot;</span><span class="p">}</span> 
+    <span class="c1"># creating list of actual countries requested</span>
+    <span class="n">li</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">cnt</span><span class="p">)):</span>
+        <span class="n">cnt</span><span class="p">[</span><span class="n">r</span><span class="p">]</span> <span class="o">=</span> <span class="n">cnt</span><span class="p">[</span><span class="n">r</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="s1">&#39;_&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">year</span><span class="p">[</span><span class="n">r</span><span class="p">])</span> <span class="o">==</span> <span class="nb">list</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">year</span><span class="p">[</span><span class="n">r</span><span class="p">]:</span>
+                <span class="n">cntName</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">cnt</span><span class="p">[</span><span class="n">r</span><span class="p">]</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">]</span>
+                <span class="n">li</span> <span class="o">=</span> <span class="n">li</span> <span class="o">+</span> <span class="n">cntName</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">cntName</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">cnt</span><span class="p">[</span><span class="n">r</span><span class="p">]</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">year</span><span class="p">[</span><span class="n">r</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">]</span>
+            <span class="n">li</span> <span class="o">=</span> <span class="n">li</span> <span class="o">+</span> <span class="n">cntName</span>
+    <span class="c1"># main loop with the actual countries</span>
+    <span class="n">df_todos</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">li</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;iteration </span><span class="si">{</span><span class="n">c</span><span class="si">}</span><span class="s1">: </span><span class="si">{</span><span class="n">style</span><span class="o">.</span><span class="n">green</span><span class="si">}{</span><span class="n">name</span><span class="si">}{</span><span class="n">style</span><span class="o">.</span><span class="n">endc</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;argentina_92&#39;</span><span class="p">:</span>
+            <span class="n">df_todos</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_stata</span><span class="p">(</span><span class="s1">&#39;https://drive.google.com/uc?id=&#39;</span> <span class="o">+</span> <span class="n">countries</span><span class="p">[</span><span class="n">name</span><span class="p">],</span> <span class="n">convert_categoricals</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> 
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">df_todos</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_stata</span><span class="p">(</span><span class="s1">&#39;https://drive.google.com/uc?id=&#39;</span> <span class="o">+</span> <span class="n">countries</span><span class="p">[</span><span class="n">name</span><span class="p">],</span> <span class="n">convert_categoricals</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> 
+        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="c1"># restringimos la velocidad de cada query  </span>
+        <span class="n">c</span><span class="o">+=</span><span class="mi">1</span>
+    <span class="k">return</span> <span class="n">df_todos</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Podemos probar si funciona, creando una lista de países y una lista de años.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Importamos las bases de Argentina, Honduras, Paraguay y Venezuela (2006)</span>
+<span class="n">paises</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;argentina&#39;</span><span class="p">,</span> <span class="s1">&#39;honduras&#39;</span><span class="p">,</span> <span class="s1">&#39;paraguay&#39;</span><span class="p">,</span> <span class="s1">&#39;venezuela&#39;</span><span class="p">]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;06&#39;</span><span class="p">,</span> <span class="s1">&#39;06&#39;</span><span class="p">,</span> <span class="s1">&#39;07&#39;</span><span class="p">,</span> <span class="s1">&#39;06&#39;</span><span class="p">]</span>
+<span class="n">df_todos</span> <span class="o">=</span> <span class="n">import_dta</span><span class="p">(</span><span class="n">cnt</span><span class="o">=</span><span class="n">paises</span><span class="p">,</span> <span class="n">year</span><span class="o">=</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>iteration 1: <span class=" -Color -Color-Bold -Color-Bold-Green">argentina_06</span>
+iteration 2: <span class=" -Color -Color-Bold -Color-Bold-Green">honduras_06</span>
+iteration 3: <span class=" -Color -Color-Bold -Color-Bold-Green">paraguay_07</span>
+iteration 4: <span class=" -Color -Color-Bold -Color-Bold-Green">venezuela_06</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Ahora tenemos una función que acepta lista de países y de años para importar y cargar cada <em>dataset</em> dentro de un diccionario. La función es mutable, iremos agregando bases a las opciones a medida que avancemos en el desarrollo del anexo y mejorando la misma en términos de prolijidad y estructura. Claramente, la función es mejorable y pensar en escenarios donde la misma no funcione resulta un buen ejercicio para mejorarla. A continuación, trabajaremos con las bases importadas en la rutina de arriba.</p>
+<p>Una vez cargadas las bases, creamos el objeto <em>ty_todos</em> que toma valores de diferentes tasas del impuesto aplicada sobre el <em>ipcf</em>. Teniendo esta lista realizamos un bucle sobre cada impuesto y cada país utilizado aplicando el siguiente procedimiento:</p>
+<ol class="simple">
+<li><p>ordenamos las observaciones por <em>id</em></p></li>
+<li><p>identificamos al primer miembro del hogar</p></li>
+<li><p>creamos la variable impuesto, que va a ser la alícuota <em>ty</em> que se multiplica al <em>ipcf</em></p></li>
+<li><p>creamos <em>subsidio</em>, que se calcula sumando por hogar la recaudación de impuestos, es decir, sumamos la variable <em>impuesto</em> por hogar</p></li>
+<li><p>seteamos a cero el valor del subsidio para todos los miembros del hogar distintos al primero, de esta manera, el subsidio solo lo recibe un integrante</p></li>
+<li><p>creamos una variable para el nuevo valor de ingreso per cápita familiar, restando el impuesto y sumando el subsidio</p></li>
+<li><p>hacemos uso de nuestra función <code class="docutils literal notranslate"><span class="pre">ratq51</span></code> para computar el cociente del ingreso promedio de los quintiles 5 y 1 como indicador de desigualdad, a partir del ingreso modificado</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Armamos listas con las bases para las que vamos a calcular el cociente de quintiles y las alicuotas del impuesto simulado</span>
+<span class="n">ty_todos</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">]</span>
+<span class="c1"># Armamos un dataframe vacio para almacenar los resultados</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+<span class="c1"># Rellenamos el dataframe con los cocientes de quintiles para cada combinacion de pais y alicuota</span>
+<span class="n">j</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">ty</span> <span class="ow">in</span> <span class="n">ty_todos</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">df_todos</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">df_todos</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+        <span class="n">df</span><span class="p">[</span><span class="s2">&quot;tag_hogar&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">cumcount</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span>
+        <span class="n">df</span><span class="p">[</span><span class="s2">&quot;impuesto&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;ipcf&quot;</span><span class="p">]</span><span class="o">*</span><span class="n">ty</span>
+        <span class="c1">#Recaudacion impuesto por hogar:</span>
+        <span class="n">df</span><span class="p">[</span><span class="s2">&quot;subsidio&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;id&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">impuesto</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="s1">&#39;sum&#39;</span><span class="p">)</span>
+        <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;tag_hogar&quot;</span><span class="p">]</span> <span class="o">!=</span> <span class="kc">True</span><span class="p">,</span><span class="s2">&quot;subsidio&quot;</span><span class="p">]</span><span class="o">=</span> <span class="mi">0</span>
+        <span class="n">df</span><span class="p">[</span><span class="s2">&quot;ipcf_star&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;ipcf&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;impuesto&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;subsidio&quot;</span><span class="p">]</span>
+        <span class="n">results</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">ty</span><span class="p">,</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">ratq51</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;ipcf_star&quot;</span><span class="p">,</span><span class="n">weight</span><span class="o">=</span><span class="s2">&quot;pondera&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">j</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="n">j</span> <span class="o">=</span> <span class="n">j</span> <span class="o">-</span> <span class="mi">3</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">j</span><span class="o">=</span> <span class="n">j</span> <span class="o">+</span> <span class="mi">1</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Asignamos nombres a las columnas y verificamos los resultados</span>
+<span class="n">results</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Argentina&#39;</span><span class="p">,</span> <span class="s1">&#39;Honduras&#39;</span><span class="p">,</span> <span class="s1">&#39;Paraguay&#39;</span><span class="p">,</span> <span class="s1">&#39;Venezuela&#39;</span><span class="p">]</span>
+<span class="n">results</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Argentina</th>
+      <th>Honduras</th>
+      <th>Paraguay</th>
+      <th>Venezuela</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0.0</th>
+      <td>30.353247</td>
+      <td>13.434139</td>
+      <td>14.290753</td>
+      <td>11.411448</td>
+    </tr>
+    <tr>
+      <th>0.1</th>
+      <td>31.697813</td>
+      <td>14.195312</td>
+      <td>15.037427</td>
+      <td>11.941979</td>
+    </tr>
+    <tr>
+      <th>0.2</th>
+      <td>35.299732</td>
+      <td>16.056223</td>
+      <td>16.887499</td>
+      <td>13.339560</td>
+    </tr>
+    <tr>
+      <th>0.3</th>
+      <td>40.956234</td>
+      <td>18.923555</td>
+      <td>19.819693</td>
+      <td>15.598350</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="empleo-de-ponderadores">
+<h2>3.6 Empleo de ponderadores<a class="headerlink" href="#empleo-de-ponderadores" title="Permalink to this headline">#</a></h2>
+<p><a class="reference external" href="https://drive.google.com/file/d/1MwQrMylnYL0VHrLRM3JafsCBE9NkisAJ/view"><em><strong>Páginas 157</strong></em></a></p>
+<p>El bloque de código que sigue puede utilizarse para construir un cuadro como el 3.9 del texto, que muestra la relación entre el ingreso per cápita familiar y el valor de la variable de ponderación. En primer lugar, volvemos a descargar las bases que vamos a utilizar.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Importamos las bases de Argentina, Honduras, Paraguay y Venezuela (2006)</span>
+<span class="n">paises</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;argentina&#39;</span><span class="p">,</span> <span class="s1">&#39;honduras&#39;</span><span class="p">,</span> <span class="s1">&#39;mexico&#39;</span><span class="p">,</span> <span class="s1">&#39;nicaragua&#39;</span><span class="p">]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;06&#39;</span><span class="p">,</span> <span class="s1">&#39;06&#39;</span><span class="p">,</span> <span class="s1">&#39;06&#39;</span><span class="p">,</span> <span class="s1">&#39;05&#39;</span><span class="p">]</span>
+<span class="n">df_todos</span> <span class="o">=</span> <span class="n">import_dta</span><span class="p">(</span><span class="n">cnt</span><span class="o">=</span><span class="n">paises</span><span class="p">,</span> <span class="n">year</span><span class="o">=</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>iteration 1: <span class=" -Color -Color-Bold -Color-Bold-Green">argentina_06</span>
+iteration 2: <span class=" -Color -Color-Bold -Color-Bold-Green">honduras_06</span>
+iteration 3: <span class=" -Color -Color-Bold -Color-Bold-Green">mexico_06</span>
+iteration 4: <span class=" -Color -Color-Bold -Color-Bold-Green">nicaragua_05</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Con las bases ya cargadas pasamos a realizar el siguiente procedimiento, en un bucle para los países:</p>
+<ol class="simple">
+<li><p>ordenamos por <em>id</em></p></li>
+<li><p>generamos la variable <em>shrpop</em></p></li>
+<li><p>identificamos el quintil de la observación según <em>shrpop</em>, creando la variable <em>quintil</em></p></li>
+<li><p>calculamos el valor promedio del factor de expansión agrupando por <em>quintil</em> previamente</p></li>
+<li><p>unimos el resultado al <em>dataframe</em> <em>df_total</em></p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="n">action</span><span class="o">=</span><span class="s1">&#39;ignore&#39;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="ne">FutureWarning</span><span class="p">)</span>
+<span class="c1"># Creamos un data frame para ir almacenando los datos de cada pais</span>
+<span class="n">df_total</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;quintil&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]}</span>
+<span class="n">df_total</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">df_total</span><span class="p">)</span>
+<span class="c1"># # Rellenamos el data frame con el valor de ponderacion promedio por quintil para cada pais</span>
+<span class="c1"># df_todos = [df_arg, df_cri, df_mex, df_nic]</span>
+
+<span class="n">i</span><span class="o">=</span><span class="mi">1</span>
+<span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">df_todos</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;iteration</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">: </span><span class="si">{</span><span class="n">style</span><span class="o">.</span><span class="n">green</span><span class="si">}{</span><span class="n">name</span><span class="si">}{</span><span class="n">style</span><span class="o">.</span><span class="n">endc</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df_todos</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
+    <span class="n">df</span><span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;ipcf&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+    <span class="n">df</span><span class="p">[</span><span class="s2">&quot;shrpop&quot;</span><span class="p">]</span><span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;pondera&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">cumsum</span><span class="p">()</span>
+    <span class="n">df</span><span class="p">[</span><span class="s2">&quot;shrpop&quot;</span><span class="p">]</span><span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;shrpop&quot;</span><span class="p">]</span><span class="o">/</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;pondera&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+    
+    <span class="n">df</span><span class="p">[</span><span class="s2">&quot;quintil&quot;</span><span class="p">]</span><span class="o">=</span><span class="mi">0</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;shrpop&quot;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mf">0.2</span><span class="p">,</span><span class="s2">&quot;quintil&quot;</span><span class="p">]</span><span class="o">=</span><span class="mi">1</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;shrpop&quot;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mf">0.4</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;shrpop&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mf">0.2</span><span class="p">),</span><span class="s2">&quot;quintil&quot;</span><span class="p">]</span><span class="o">=</span><span class="mi">2</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;shrpop&quot;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mf">0.6</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;shrpop&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mf">0.4</span><span class="p">),</span><span class="s2">&quot;quintil&quot;</span><span class="p">]</span><span class="o">=</span><span class="mi">3</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;shrpop&quot;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mf">0.8</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;shrpop&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mf">0.6</span><span class="p">),</span><span class="s2">&quot;quintil&quot;</span><span class="p">]</span><span class="o">=</span><span class="mi">4</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;shrpop&quot;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;shrpop&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mf">0.8</span><span class="p">),</span><span class="s2">&quot;quintil&quot;</span><span class="p">]</span><span class="o">=</span><span class="mi">5</span>
+    <span class="n">df_agg</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;quintil&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">agg</span><span class="p">({</span><span class="s1">&#39;pondera&#39;</span><span class="p">:</span><span class="s1">&#39;mean&#39;</span><span class="p">})</span> 
+    <span class="n">df_total</span> <span class="o">=</span> <span class="n">df_total</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df_agg</span><span class="p">[</span><span class="s1">&#39;pondera&#39;</span><span class="p">],</span> <span class="n">on</span> <span class="o">=</span> <span class="s1">&#39;quintil&#39;</span><span class="p">)</span>
+    <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>iteration1: <span class=" -Color -Color-Bold -Color-Bold-Green">argentina_06</span>
+iteration2: <span class=" -Color -Color-Bold -Color-Bold-Green">honduras_06</span>
+iteration3: <span class=" -Color -Color-Bold -Color-Bold-Green">mexico_06</span>
+iteration4: <span class=" -Color -Color-Bold -Color-Bold-Green">nicaragua_05</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Asignamos nombres a las columnas y verificamos los resultados</span>
+<span class="n">df_total</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Quintil&#39;</span><span class="p">,</span> <span class="s1">&#39;Argentina&#39;</span><span class="p">,</span> <span class="s1">&#39;Honduras&#39;</span><span class="p">,</span> <span class="s1">&#39;Mexico&#39;</span><span class="p">,</span> <span class="s1">&#39;Nicaragua&#39;</span><span class="p">]</span>
+<span class="n">df_total</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Quintil</th>
+      <th>Argentina</th>
+      <th>Costa Rica</th>
+      <th>Mexico</th>
+      <th>Nicaragua</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>212.469803</td>
+      <td>83.344233</td>
+      <td>1067.922660</td>
+      <td>114.630926</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>230.594847</td>
+      <td>79.286837</td>
+      <td>1251.622716</td>
+      <td>129.206679</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>225.251378</td>
+      <td>73.965157</td>
+      <td>1366.020942</td>
+      <td>141.302370</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>238.843591</td>
+      <td>69.881563</td>
+      <td>1352.518184</td>
+      <td>160.510099</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>238.079130</td>
+      <td>65.818807</td>
+      <td>1317.389374</td>
+      <td>170.100365</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Seguidamente se calculan las tasas de pobreza con y sin ponderadores para cada una de las regiones de México en 2006, correspondientes al cuadro 3.10 del texto. En la primer línea el objeto “lp” almacena el valor de la línea de pobreza, en base a la cual se genera la variable binaria <em>pobreza</em>, que vale 1 para los individuos debajo de este umbral (es decir, <code class="docutils literal notranslate"><span class="pre">ipcf</span> <span class="pre">&lt;</span> <span class="pre">lp</span></code>) y 0 para el resto. Al computar el promedio de esta variable obtenemos la proporción de personas por debajo de la línea de la pobreza, la misma se realiza con y sin ponderador para cada una de las regiones, en un bucle para las 9 regiones de México.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Cargamos la base de Mexico de 2006</span>
+<span class="n">df_mex</span> <span class="o">=</span> <span class="n">df_todos</span><span class="p">[</span><span class="s1">&#39;mexico_06&#39;</span><span class="p">]</span>
+<span class="c1"># Establecemos una linea de pobreza y añadimos una columna a la base de datos con una variable que vale 1 si el IPCF de un </span>
+<span class="c1"># individuo es inferior a esa linea y 0 en caso contrario. </span>
+<span class="n">lp</span> <span class="o">=</span> <span class="mf">633.90918</span>
+<span class="n">df_mex</span><span class="p">[</span><span class="s2">&quot;pobreza&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">df_mex</span><span class="p">[</span><span class="s2">&quot;ipcf&quot;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">lp</span><span class="p">)</span> <span class="o">*</span> <span class="mi">1</span>
+<span class="c1"># Creamos un dataframe para almacenar las tasas de pobreza por region </span>
+<span class="n">tasas_pobreza</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;region&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Noroeste&#39;</span><span class="p">,</span> <span class="s1">&#39;Norte&#39;</span><span class="p">,</span> <span class="s1">&#39;Noreste&#39;</span><span class="p">,</span> <span class="s1">&#39;Centro-Occidente&#39;</span><span class="p">,</span> <span class="s1">&#39;Centro-Este&#39;</span><span class="p">,</span> <span class="s1">&#39;Sur&#39;</span><span class="p">,</span> <span class="s1">&#39;Oriente&#39;</span><span class="p">,</span> <span class="s1">&#39;Peninsula de Yucatan&#39;</span><span class="p">,</span> <span class="s1">&#39;Nacional&#39;</span><span class="p">]}</span>
+<span class="n">tasas_pobreza</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">tasas_pobreza</span><span class="p">)</span>
+<span class="n">tasas_pobreza</span><span class="p">[</span><span class="s1">&#39;pob_sin_pond&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">tasas_pobreza</span><span class="p">[</span><span class="s1">&#39;pob_pond&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="c1"># Rellenamos el dataframe con las tasas de pobreza</span>
+<span class="n">j</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">9</span><span class="p">):</span> 
+    <span class="n">df_mex_1</span> <span class="o">=</span> <span class="n">df_mex</span><span class="p">[</span><span class="n">df_mex</span><span class="p">[</span><span class="s1">&#39;region&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">pondera_1</span> <span class="o">=</span> <span class="n">df_mex_1</span><span class="p">[</span><span class="s2">&quot;pondera&quot;</span><span class="p">]</span>
+    <span class="n">tasas_pobreza</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="s1">&#39;pob_sin_pond&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">average</span><span class="p">(</span><span class="n">df_mex_1</span><span class="p">[</span><span class="s2">&quot;pobreza&quot;</span><span class="p">])</span>
+    <span class="n">tasas_pobreza</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="s1">&#39;pob_pond&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">average</span><span class="p">(</span><span class="n">df_mex_1</span><span class="p">[</span><span class="s2">&quot;pobreza&quot;</span><span class="p">],</span><span class="n">weights</span><span class="o">=</span><span class="n">pondera_1</span><span class="p">)</span>   
+    <span class="n">j</span> <span class="o">+=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Agregamos la tasa de pobreza nacional y verificamos los datos</span>
+<span class="n">pondera</span> <span class="o">=</span> <span class="n">df_mex</span><span class="p">[</span><span class="s2">&quot;pondera&quot;</span><span class="p">]</span>
+<span class="n">tasas_pobreza</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="s1">&#39;pob_sin_pond&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">average</span><span class="p">(</span><span class="n">df_mex</span><span class="p">[</span><span class="s2">&quot;pobreza&quot;</span><span class="p">])</span>
+<span class="n">tasas_pobreza</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="s1">&#39;pob_pond&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">average</span><span class="p">(</span><span class="n">df_mex</span><span class="p">[</span><span class="s2">&quot;pobreza&quot;</span><span class="p">],</span> <span class="n">weights</span><span class="o">=</span><span class="n">pondera</span><span class="p">)</span> 
+<span class="n">tasas_pobreza</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Region&#39;</span><span class="p">,</span> <span class="s1">&#39;Pobreza sin ponderador&#39;</span><span class="p">,</span> <span class="s1">&#39;Pobreza con ponderador&#39;</span><span class="p">]</span>
+<span class="n">tasas_pobreza</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Region</th>
+      <th>Pobreza sin ponderador</th>
+      <th>Pobreza con ponderador</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Noroeste</td>
+      <td>0.099922</td>
+      <td>0.096917</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Norte</td>
+      <td>0.186734</td>
+      <td>0.133521</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Noreste</td>
+      <td>0.114403</td>
+      <td>0.063756</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Centro-Occidente</td>
+      <td>0.125055</td>
+      <td>0.131974</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Centro-Este</td>
+      <td>0.148284</td>
+      <td>0.107151</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Sur</td>
+      <td>0.456111</td>
+      <td>0.359241</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>Oriente</td>
+      <td>0.223839</td>
+      <td>0.218525</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>Peninsula de Yucatan</td>
+      <td>0.198000</td>
+      <td>0.157331</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>Nacional</td>
+      <td>0.188186</td>
+      <td>0.148160</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="diseno-muestral">
+<h2>3.7 Diseño muestral<a class="headerlink" href="#diseno-muestral" title="Permalink to this headline">#</a></h2>
+<p><a class="reference external" href="https://drive.google.com/file/d/1MwQrMylnYL0VHrLRM3JafsCBE9NkisAJ/view"><em><strong>Páginas 160</strong></em></a></p>
+<p>En este apartado se muestra cómo puede considerarse la estructura muestral al momento de computar un indicador relativamente sencillo; ver cuadro 3.11 del texto del capítulo. A modo de ejemplo, se emplea la Encuesta de Hogares de Propósitos Múltiples (EHPM) de Costa Rica para el año 2006 para calcular la proporción de trabajadores empleados en las industrias alimenticia y textil.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Importamos la base de Costa Rica para 2006</span>
+<span class="n">paises</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;costa rica&#39;</span><span class="p">]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;06&#39;</span><span class="p">]</span>
+<span class="n">df_todos</span> <span class="o">=</span> <span class="n">import_dta</span><span class="p">(</span><span class="n">cnt</span><span class="o">=</span><span class="n">paises</span><span class="p">,</span> <span class="n">year</span><span class="o">=</span><span class="n">y</span><span class="p">)</span>
+<span class="n">df_cri</span> <span class="o">=</span> <span class="n">df_todos</span><span class="p">[</span><span class="s1">&#39;costa_rica_06&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>iteration 1: <span class=" -Color -Color-Bold -Color-Bold-Green">costa_rica_06</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>En primer lugar, se generan quintiles de ingreso laboral (variable <em>ila</em>) para los individuos
+ocupados y que declaran sector de empleo.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Reducimos la muestra a los ocupados sin valores faltantes en las variables &#39;sector&#39; e &#39;ila&#39;</span>
+<span class="n">df_cri</span> <span class="o">=</span> <span class="n">df_cri</span><span class="p">[</span><span class="n">df_cri</span><span class="p">[</span><span class="s1">&#39;ocupado&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">df_cri</span> <span class="o">=</span> <span class="n">df_cri</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;sector&#39;</span><span class="p">])</span>
+<span class="n">df_cri</span> <span class="o">=</span> <span class="n">df_cri</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;ila&#39;</span><span class="p">])</span>
+
+<span class="c1"># Creamos quintiles en base al ingreso laboral de los ocupados</span>
+<span class="n">df_cri</span><span class="o">=</span> <span class="n">df_cri</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;ila&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+<span class="n">df_cri</span><span class="p">[</span><span class="s2">&quot;shrpop&quot;</span><span class="p">]</span><span class="o">=</span> <span class="n">df_cri</span><span class="p">[</span><span class="s2">&quot;pondera&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">cumsum</span><span class="p">()</span>
+<span class="n">df_cri</span><span class="p">[</span><span class="s2">&quot;shrpop&quot;</span><span class="p">]</span><span class="o">=</span> <span class="n">df_cri</span><span class="p">[</span><span class="s2">&quot;shrpop&quot;</span><span class="p">]</span><span class="o">/</span> <span class="n">df_cri</span><span class="p">[</span><span class="s2">&quot;pondera&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+    
+<span class="n">df_cri</span><span class="p">[</span><span class="s2">&quot;quintil&quot;</span><span class="p">]</span><span class="o">=</span><span class="mi">0</span>
+<span class="n">df_cri</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df_cri</span><span class="p">[</span><span class="s2">&quot;shrpop&quot;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mf">0.2</span><span class="p">,</span><span class="s2">&quot;quintil&quot;</span><span class="p">]</span><span class="o">=</span><span class="mi">1</span>
+<span class="n">df_cri</span><span class="o">.</span><span class="n">loc</span><span class="p">[(</span><span class="n">df_cri</span><span class="p">[</span><span class="s2">&quot;shrpop&quot;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mf">0.4</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df_cri</span><span class="p">[</span><span class="s2">&quot;shrpop&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mf">0.2</span><span class="p">),</span><span class="s2">&quot;quintil&quot;</span><span class="p">]</span><span class="o">=</span><span class="mi">2</span>
+<span class="n">df_cri</span><span class="o">.</span><span class="n">loc</span><span class="p">[(</span><span class="n">df_cri</span><span class="p">[</span><span class="s2">&quot;shrpop&quot;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mf">0.6</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df_cri</span><span class="p">[</span><span class="s2">&quot;shrpop&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mf">0.4</span><span class="p">),</span><span class="s2">&quot;quintil&quot;</span><span class="p">]</span><span class="o">=</span><span class="mi">3</span>
+<span class="n">df_cri</span><span class="o">.</span><span class="n">loc</span><span class="p">[(</span><span class="n">df_cri</span><span class="p">[</span><span class="s2">&quot;shrpop&quot;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mf">0.8</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df_cri</span><span class="p">[</span><span class="s2">&quot;shrpop&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mf">0.6</span><span class="p">),</span><span class="s2">&quot;quintil&quot;</span><span class="p">]</span><span class="o">=</span><span class="mi">4</span>
+<span class="n">df_cri</span><span class="o">.</span><span class="n">loc</span><span class="p">[(</span><span class="n">df_cri</span><span class="p">[</span><span class="s2">&quot;shrpop&quot;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df_cri</span><span class="p">[</span><span class="s2">&quot;shrpop&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mf">0.8</span><span class="p">),</span><span class="s2">&quot;quintil&quot;</span><span class="p">]</span><span class="o">=</span><span class="mi">5</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Luego, la variable lowtec que vale 1 para los individuos empleados en las industrias alimenticia y textil (variable <em>sector=2</em>), 0 para los trabajadores empleados en otros sectores, y missing para quienes no tienen asignado un quintil de ingreso laboral.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Generamos una variable que indique si el sector corresponde a una industria de baja tecnologia</span>
+<span class="n">df_cri</span><span class="p">[</span><span class="s1">&#39;lowtec&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">df_cri</span><span class="p">[</span><span class="s2">&quot;sector&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="mi">1</span>  
+</pre></div>
+</div>
+</div>
+</div>
+<p>La estratificación de la <strong>EHPM</strong> de Costa Rica emplea dos criterios: región y zona urbana o rural. Por lo tanto, es necesario crear la variable de estratificación que permita identificar a cuál de los estratos pertenece cada observación de la encuesta. Utilizamos <code class="docutils literal notranslate"><span class="pre">econtools.group_id</span></code> para generar la variable <em>estrato</em>, que identifica con un número a cada uno de los “grupos” diferentes en que puede dividirse la base de datos al combinar las variables que recibe como argumento. El primero de los grupos recibe el número 1, el segundo grupo recibe el número 2, y así sucesivamente. Lueog, calculamos la proporción de ocupados en industria de baja tecnologia por quintil, junto con su desvío y error estándar y la cantidad de observaciones.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Generamos una nueva variable que agrupe las variables &#39;region&#39; y &#39;urbano&#39;</span>
+<span class="n">df_cri</span> <span class="o">=</span> <span class="n">econtools</span><span class="o">.</span><span class="n">group_id</span><span class="p">(</span><span class="n">df_cri</span><span class="p">,</span> <span class="n">cols</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;region&#39;</span><span class="p">,</span> <span class="s1">&#39;urbano&#39;</span><span class="p">],</span> <span class="n">merge</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">df_cri</span> <span class="o">=</span> <span class="n">df_cri</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;group_id&#39;</span><span class="p">:</span> <span class="s1">&#39;estrato&#39;</span><span class="p">})</span>
+<span class="c1"># computos por quintil</span>
+<span class="n">df_agg</span> <span class="o">=</span> <span class="n">df_cri</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;quintil&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">agg</span><span class="p">({</span><span class="s1">&#39;lowtec&#39;</span><span class="p">:[</span><span class="s1">&#39;mean&#39;</span><span class="p">,</span> <span class="s1">&#39;std&#39;</span><span class="p">,</span> <span class="s1">&#39;count&#39;</span><span class="p">]})</span> 
+<span class="n">df_agg</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  
+<span class="n">df_agg</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">,</span> <span class="n">df_agg</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">values</span><span class="p">))</span>
+<span class="n">df_agg</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Quintil&#39;</span><span class="p">,</span> <span class="s1">&#39;Media&#39;</span><span class="p">,</span> <span class="s1">&#39;Desvio&#39;</span><span class="p">,</span> <span class="s1">&#39;N&#39;</span><span class="p">]</span>
+<span class="n">df_agg</span><span class="p">[</span><span class="s1">&#39;Error estandar&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_agg</span><span class="p">[</span><span class="s1">&#39;Desvio&#39;</span><span class="p">]</span><span class="o">/</span><span class="p">(</span><span class="n">df_agg</span><span class="p">[</span><span class="s1">&#39;N&#39;</span><span class="p">])</span><span class="o">**</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Visualizamos</span>
+<span class="n">df_agg</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Quintil</th>
+      <th>Media</th>
+      <th>Desvio</th>
+      <th>N</th>
+      <th>Error estandar</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>0.066213</td>
+      <td>0.248687</td>
+      <td>3670</td>
+      <td>0.004105</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>0.072895</td>
+      <td>0.260003</td>
+      <td>3361</td>
+      <td>0.004485</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>0.073270</td>
+      <td>0.260616</td>
+      <td>3453</td>
+      <td>0.004435</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>0.066368</td>
+      <td>0.248961</td>
+      <td>3345</td>
+      <td>0.004305</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>0.045486</td>
+      <td>0.208403</td>
+      <td>2902</td>
+      <td>0.003869</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Luego, realizamos el mismo ejercicio pero incluyendo a los ponderadores. Para ello, con la variable <em>quintil</em> ya creada realizamos un bucle filtrando en cada instancia el quintil de interés, donde se realizan los mismos cálculos realizados antes. Una vez realizado el cálculo de la media y el desvío estándar le agregamos los dos estadísticos que faltan, el error estándar y la cantidad de observaciones.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Dataframe vacio para ir colocando los valores</span>
+<span class="n">df_pondera</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Quintil&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> <span class="s1">&#39;Media&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;Desvio&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]}</span>
+<span class="n">df_pondera</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">df_pondera</span><span class="p">)</span>
+
+<span class="c1"># Rellenamos el dataframe</span>
+<span class="n">j</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">6</span><span class="p">):</span> 
+
+    <span class="n">df_cri_1</span> <span class="o">=</span> <span class="n">df_cri</span><span class="p">[</span><span class="n">df_cri</span><span class="p">[</span><span class="s1">&#39;quintil&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">lowtec_1</span> <span class="o">=</span> <span class="n">df_cri_1</span><span class="p">[</span><span class="s2">&quot;lowtec&quot;</span><span class="p">]</span>
+    <span class="n">pondera_1</span> <span class="o">=</span> <span class="n">df_cri_1</span><span class="p">[</span><span class="s2">&quot;pondera&quot;</span><span class="p">]</span>
+    <span class="n">media_1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">average</span><span class="p">(</span><span class="n">lowtec_1</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="n">pondera_1</span><span class="p">)</span>  
+    <span class="n">var_1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">average</span><span class="p">((</span><span class="n">lowtec_1</span><span class="o">-</span><span class="n">media_1</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="n">pondera_1</span><span class="p">)</span> 
+    <span class="n">de_1</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">var_1</span><span class="p">)</span>
+    <span class="n">df_pondera</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="s1">&#39;Media&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">media_1</span>
+    <span class="n">df_pondera</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="s1">&#39;Desvio&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">de_1</span>
+    <span class="n">j</span> <span class="o">=</span> <span class="n">j</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="c1"># Agregamos columnas con el numero de observaciones y el error estandar y verificamos</span>
+<span class="n">N</span> <span class="o">=</span> <span class="n">df_agg</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;Media&#39;</span><span class="p">,</span> <span class="s1">&#39;Desvio&#39;</span><span class="p">,</span> <span class="s1">&#39;Error estandar&#39;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">df_pondera</span> <span class="o">=</span> <span class="n">df_pondera</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">on</span> <span class="o">=</span> <span class="s1">&#39;Quintil&#39;</span><span class="p">)</span>
+<span class="n">df_pondera</span><span class="p">[</span><span class="s1">&#39;Error estandar&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_pondera</span><span class="p">[</span><span class="s1">&#39;Desvio&#39;</span><span class="p">]</span><span class="o">/</span><span class="p">(</span><span class="n">df_pondera</span><span class="p">[</span><span class="s1">&#39;N&#39;</span><span class="p">])</span><span class="o">**</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+<span class="c1"># visualizamos</span>
+<span class="n">df_pondera</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Quintil</th>
+      <th>Media</th>
+      <th>Desvio</th>
+      <th>N</th>
+      <th>Error estandar</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>0.067483</td>
+      <td>0.250857</td>
+      <td>3670</td>
+      <td>0.004141</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>0.085692</td>
+      <td>0.279909</td>
+      <td>3361</td>
+      <td>0.004828</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>0.072924</td>
+      <td>0.260011</td>
+      <td>3453</td>
+      <td>0.004425</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>0.060119</td>
+      <td>0.237708</td>
+      <td>3345</td>
+      <td>0.004110</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>0.045484</td>
+      <td>0.208364</td>
+      <td>2902</td>
+      <td>0.003868</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="fuentes-de-ingreso">
+<h2>3.8 Fuentes de ingreso<a class="headerlink" href="#fuentes-de-ingreso" title="Permalink to this headline">#</a></h2>
+<p><a class="reference external" href="https://drive.google.com/file/d/1MwQrMylnYL0VHrLRM3JafsCBE9NkisAJ/view"><em><strong>Páginas 161</strong></em></a></p>
+<p>El bloque de código a continuación muestra cómo computar la importancia que tiene cada fuente de ingresos identificada en las encuestas de hogares (cuadro 3.13). Dentro de las fuentes de ingreso consideramos: laboral (variable <em>ila</em>), jubilaciones (<em>ijubi</em>), capital (<em>icap</em>), transferencias (<em>itran</em>) y otros (<em>ionl</em>). En primer lugar, cargamos las bases de los países que vamos a utilizar. Luego, utilizando un bucle para cada país realizamos el siguiente procedimiento:</p>
+<ol class="simple">
+<li><p>generamos la variable ingreso total (<em>itot</em>), como la suma de las columnas para cada ingreso</p></li>
+<li><p>a cada fuente de ingreso la multiplicamos por el factor de expansión <em>pondera</em></p></li>
+<li><p>creamos las variables de participación en el ingreso calculando el ratio de cada concepto sobre el ingreso total</p></li>
+<li><p>repetimos para cada país y visualizamos resultados</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Cargamos las bases de Argentina, Bolivia, Colombia, R. Dominicana y Uruguay (circa 2007)</span>
+<span class="c1"># Importamos la base de Costa Rica para 2006</span>
+<span class="n">paises</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;argentina2&#39;</span><span class="p">,</span><span class="s1">&#39;bolivia&#39;</span><span class="p">,</span><span class="s1">&#39;colombia&#39;</span><span class="p">,</span><span class="s1">&#39;republica dominicana&#39;</span><span class="p">,</span><span class="s1">&#39;uruguay&#39;</span><span class="p">]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;06&#39;</span><span class="p">,</span><span class="s1">&#39;05&#39;</span><span class="p">,</span><span class="s1">&#39;06&#39;</span><span class="p">,</span><span class="s1">&#39;06&#39;</span><span class="p">,</span><span class="s1">&#39;06&#39;</span><span class="p">]</span>
+
+
+<span class="n">df_todos</span> <span class="o">=</span> <span class="n">import_dta</span><span class="p">(</span><span class="n">cnt</span><span class="o">=</span><span class="n">paises</span><span class="p">,</span> <span class="n">year</span><span class="o">=</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>iteration 1: <span class=" -Color -Color-Bold -Color-Bold-Green">argentina2_06</span>
+iteration 2: <span class=" -Color -Color-Bold -Color-Bold-Green">bolivia_05</span>
+iteration 3: <span class=" -Color -Color-Bold -Color-Bold-Green">colombia_06</span>
+iteration 4: <span class=" -Color -Color-Bold -Color-Bold-Green">republica_dominicana_06</span>
+iteration 5: <span class=" -Color -Color-Bold -Color-Bold-Green">uruguay_06</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Creamos un dataframe para almacenar los resultados</span>
+<span class="n">results</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Pais&#39;</span><span class="p">,</span> <span class="s1">&#39;Año&#39;</span><span class="p">,</span> <span class="s1">&#39;Laborales&#39;</span><span class="p">,</span> <span class="s1">&#39;Capital&#39;</span><span class="p">,</span> <span class="s1">&#39;Transferencias&#39;</span><span class="p">])</span>
+<span class="n">results</span><span class="p">[</span><span class="s1">&#39;Pais&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Argentina&#39;</span><span class="p">,</span> <span class="s1">&#39;Bolivia&#39;</span><span class="p">,</span> <span class="s1">&#39;Colombia&#39;</span><span class="p">,</span> <span class="s1">&#39;R. Dominicana&#39;</span><span class="p">,</span> <span class="s1">&#39;Uruguay&#39;</span><span class="p">]</span>
+<span class="n">results</span><span class="p">[</span><span class="s1">&#39;Año&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;2006&#39;</span><span class="p">,</span> <span class="s1">&#39;2005&#39;</span><span class="p">,</span> <span class="s1">&#39;2006&#39;</span><span class="p">,</span> <span class="s1">&#39;2006&#39;</span><span class="p">,</span> <span class="s1">&#39;2006&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Rellenamos el dataframe</span>
+<span class="n">j</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">df_todos</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;iteration: </span><span class="si">{</span><span class="n">style</span><span class="o">.</span><span class="n">green</span><span class="si">}{</span><span class="n">name</span><span class="si">}{</span><span class="n">style</span><span class="o">.</span><span class="n">endc</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df_todos</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;itot&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)[</span><span class="s1">&#39;ila&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">df</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)[</span><span class="s1">&#39;ijubi&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">df</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)[</span><span class="s1">&#39;icap&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">df</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)[</span><span class="s1">&#39;itran&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">df</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)[</span><span class="s1">&#39;ionl&#39;</span><span class="p">]</span> 
+    <span class="n">ila</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;ila&#39;</span><span class="p">]</span><span class="o">*</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;pondera&#39;</span><span class="p">])</span>
+    <span class="n">ijubi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;ijubi&#39;</span><span class="p">]</span><span class="o">*</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;pondera&#39;</span><span class="p">])</span>
+    <span class="n">icap</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;icap&#39;</span><span class="p">]</span><span class="o">*</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;pondera&#39;</span><span class="p">])</span>
+    <span class="n">itran</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;itran&#39;</span><span class="p">]</span><span class="o">*</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;pondera&#39;</span><span class="p">])</span>
+    <span class="n">ionl</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;ionl&#39;</span><span class="p">]</span><span class="o">*</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;pondera&#39;</span><span class="p">])</span>
+    <span class="n">itot</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;itot&#39;</span><span class="p">]</span><span class="o">*</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;pondera&#39;</span><span class="p">])</span>
+    
+    <span class="n">results</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="s1">&#39;Laborales&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ila</span><span class="o">/</span><span class="n">itot</span>
+    <span class="n">results</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="s1">&#39;Capital&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">icap</span><span class="o">/</span><span class="n">itot</span>
+    <span class="n">results</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="s1">&#39;Transferencias&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">ijubi</span> <span class="o">+</span> <span class="n">itran</span><span class="p">)</span><span class="o">/</span><span class="n">itot</span>
+    
+    <span class="n">j</span> <span class="o">=</span> <span class="n">j</span> <span class="o">+</span> <span class="mi">1</span> 
+
+<span class="c1">#Verificamos que los datos se hayan cargado correctamente</span>
+<span class="n">results</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>iteration: <span class=" -Color -Color-Bold -Color-Bold-Green">argentina2_06</span>
+iteration: <span class=" -Color -Color-Bold -Color-Bold-Green">bolivia_05</span>
+iteration: <span class=" -Color -Color-Bold -Color-Bold-Green">colombia_06</span>
+iteration: <span class=" -Color -Color-Bold -Color-Bold-Green">republica_dominicana_06</span>
+iteration: <span class=" -Color -Color-Bold -Color-Bold-Green">uruguay_06</span>
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Pais</th>
+      <th>Año</th>
+      <th>Laborales</th>
+      <th>Capital</th>
+      <th>Transferencias</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Argentina</td>
+      <td>2006</td>
+      <td>0.804241</td>
+      <td>0.014984</td>
+      <td>0.16988</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Bolivia</td>
+      <td>2005</td>
+      <td>0.812866</td>
+      <td>0.060155</td>
+      <td>0.126979</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Colombia</td>
+      <td>2006</td>
+      <td>0.859099</td>
+      <td>0.029561</td>
+      <td>0.120585</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>R. Dominicana</td>
+      <td>2006</td>
+      <td>0.758765</td>
+      <td>0.032284</td>
+      <td>0.190043</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Uruguay</td>
+      <td>2006</td>
+      <td>0.695131</td>
+      <td>0.033091</td>
+      <td>0.271777</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./sections"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="capitulo2.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Capitulo 2</p>
+        </div>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Bonavida Cristian, Laguinge Luis, Staudt Agustin y Varsavino Joaquín<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>
